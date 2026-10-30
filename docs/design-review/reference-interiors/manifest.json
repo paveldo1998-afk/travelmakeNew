@@ -1,0 +1,90 @@
+[
+  {
+    "file": "01-trips.png",
+    "source": "panels/01-trips.png",
+    "crop": [
+      16,
+      34,
+      270,
+      552
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "02-overview.png",
+    "source": "panels/02-trip-overview.png",
+    "crop": [
+      16,
+      34,
+      262,
+      554
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "03-packing.png",
+    "source": "panels/03-packing.png",
+    "crop": [
+      16,
+      34,
+      246,
+      554
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "04-plan.png",
+    "source": "panels/04-day-plan.png",
+    "crop": [
+      16,
+      34,
+      245,
+      554
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "05-documents.png",
+    "source": "panels/05-documents.png",
+    "crop": [
+      16,
+      34,
+      262,
+      488
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "06-tasks.png",
+    "source": "panels/06-tasks.png",
+    "crop": [
+      16,
+      34,
+      263,
+      488
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "07-discussions.png",
+    "source": "panels/07-discussions.png",
+    "crop": [
+      16,
+      34,
+      268,
+      488
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  },
+  {
+    "file": "08-budget.png",
+    "source": "panels/08-budget.png",
+    "crop": [
+      16,
+      34,
+      257,
+      488
+    ],
+    "purpose": "Review derivative excluding decorative device; source unchanged"
+  }
+]

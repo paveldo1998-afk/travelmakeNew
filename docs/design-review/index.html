@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TravelOrganizer — просмотр макетов Figma</title>
+<style>
+:root { color-scheme:light; font-family:system-ui,sans-serif; background:#f7f1e6;color:#2e281f; }
+* {box-sizing:border-box} body{margin:0;padding:24px;line-height:1.55} main{max-width:1280px;margin:auto}
+h1{font-size:28px;margin:0} p{max-width:90ch} a{color:#a33d0b}nav{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+nav a{padding:10px 16px;background:#fffaf2;border:1px solid #dfd0b8;border-radius:10px}
+article{margin:32px 0 56px;scroll-margin-top:16px}h2{font-size:23px} .comparison{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+figure{margin:0;max-width:100%}figcaption{margin-bottom:8px;font-size:14px;color:#675c4d}img{display:block;width:390px;max-width:100%;height:auto}
+.source img{width:260px}.state{padding:12px 16px;border-left:4px solid #ad440c;background:#fffbf2;max-width:92ch}
+button{font:inherit;background:#fffaf2;border:1px solid #dfd0b8;border-radius:10px;padding:10px;cursor:pointer}
+.notice{padding:16px;border-radius:12px;background:#f5e2cd} .links{display:flex;gap:16px;flex-wrap:wrap}
+@media(max-width:440px){body{padding:12px}.source img{width:200px}}
+</style>
+<main>
+<h1>TravelOrganizer — макеты Figma</h1>
+<p>Утверждённый референс сопоставлен с настоящими экспортами редактируемых экранов Figma. Восьмиэкранный коллаж не использован как интерфейс. Это галерея макетов, а не новый PWA-клиент.</p>
+<p class="notice"><strong>Черновик, ещё не готов к окончательному согласованию.</strong> Проверка выявила дефекты ниже. Figma Starter остановила дальнейшие изменения лимитом MCP; подготовленные исправления пока не применены. 40 дополнительных сценариев описаны, но ещё не размещены на холсте. Код приложения не изменён.</p>
+<p><a href="https://www.figma.com/design/W42BoaNlUbZcWUaoe9yYFa" target="_blank" rel="noreferrer">Открыть TravelOrganizer — PWA Design System в Figma</a></p>
+<nav id="nav"></nav><div id="screens"></div>
+</main>
+<script>
+const screens=[
+['01-trips','Мои поездки','6-37','Композиция: фотографические карточки, даты, участники, архив, создание. Реальные лицензированные фотографии отличаются от сгенерированных в референсе.'],
+['02-overview','Обзор поездки','6-150','Обложка 260 px, участники, отсчёт только дней, сетка шести действий. Закреплённые материалы продолжаются ниже видимой области.'],
+['03-packing','Сборы','6-322','Три состояния с числами и компактные группы. Контекстное добавление нужно вынести в видимую область; отдельная галочка готовности не добавлена.'],
+['04-plan','План по дням','6-498','Лента дат, время, фотографии 58×82. Найдены наложения многострочного описания и адреса; нижние действия частично обрезаны. Нужно исправить Auto Layout текста.'],
+['05-documents','Документы','6-635','Компактные категории и строки. Аудиторию и локальную копию нужно дополнительно разделить на независимые свойства/метки; кнопку добавления освободить от края панели.'],
+['06-tasks','Задачи','6-796','Нужны более плотные строки, полностью видимый последний фильтр, корректное отображение завершённых задач и контекстное добавление. Без срока показано явно.'],
+['07-discussions','Обсуждения','6-954','Деморежим явно подписан. Нужно исправить перенос первого сообщения и закрепить поле ввода над навигацией. Это синтетическая переписка, сообщения не отправляются.'],
+['08-budget','Бюджет','6-1077','План/факт/остаток отдельно от остатков на счетах. Суммы категорий сходятся. Перевод и историю нужно поднять в доступную область; категории сделать плотнее.']
+];
+for(const [name,title,id,note]of screens){
+ const a=document.createElement('a');a.href='#'+name;a.textContent=title;document.querySelector('#nav').append(a);
+ const article=document.createElement('article');article.id=name;
+ const h=document.createElement('h2');h.textContent=title;article.append(h);
+ const p=document.createElement('p');p.className='state';p.textContent=note;article.append(p);
+ const row=document.createElement('div');row.className='comparison';
+ for(const [cls,caption,path]of [['source','Внутренняя область исходного референса','reference-interiors/'+name+'.png'],['result','Figma · полный экспорт 390×844',name+'.png']]){
+  const figure=document.createElement('figure');figure.className=cls;
+  const fc=document.createElement('figcaption');fc.textContent=caption;
+  const link=document.createElement('a');link.href=path;link.target='_blank';
+  const img=document.createElement('img');img.src=path;img.alt=caption+': '+title;img.loading='lazy';link.append(img);figure.append(fc,link);row.append(figure);
+ }
+ article.append(row);const links=document.createElement('p');links.className='links';
+ const figma=document.createElement('a');figma.href='https://www.figma.com/design/W42BoaNlUbZcWUaoe9yYFa?node-id='+id;figma.textContent='Редактируемый экран в Figma';
+ const png=document.createElement('a');png.href=name+'.png';png.download='';png.textContent='Скачать PNG 390×844';links.append(figma,png);article.append(links);document.querySelector('#screens').append(article);
+}
+</script>
+</html>

@@ -1,0 +1,131 @@
+{
+  "source": "approved-travel-reference.png",
+  "source_size": [
+    1448,
+    1086
+  ],
+  "source_sha256": "36ed725326c6e07faf1aac995e4f2f035a60b9140eddab5160fcc88c94a26257",
+  "method": "Exact crops of user-supplied reference; no generated or corrected pixels; no upscaling.",
+  "panels": [
+    {
+      "file": "panels/01-trips.png",
+      "screen": "Мои поездки",
+      "crop_box": [
+        150,
+        4,
+        436,
+        574
+      ],
+      "size": [
+        286,
+        570
+      ],
+      "sha256": "aef801e4636f52983ac6abcf500b6b47bdbf5d578560709f91741ef9fb0f2aa4"
+    },
+    {
+      "file": "panels/02-trip-overview.png",
+      "screen": "Обзор поездки",
+      "crop_box": [
+        456,
+        4,
+        734,
+        576
+      ],
+      "size": [
+        278,
+        572
+      ],
+      "sha256": "cbd726f440ddb063ecf7bcf47e8aae65e2c0ab8b6c2c76b241550692284dee30"
+    },
+    {
+      "file": "panels/03-packing.png",
+      "screen": "Вещи",
+      "crop_box": [
+        756,
+        4,
+        1018,
+        576
+      ],
+      "size": [
+        262,
+        572
+      ],
+      "sha256": "cfb7d45bfe55c5285680912417ace180f36393cabb20082b4d87c11b8f785116"
+    },
+    {
+      "file": "panels/04-day-plan.png",
+      "screen": "План дня",
+      "crop_box": [
+        1039,
+        4,
+        1300,
+        576
+      ],
+      "size": [
+        261,
+        572
+      ],
+      "sha256": "a7a8cdf8c856735ee1ed2e54757b7536376b369b2bf056926f2dd6054e13f54f"
+    },
+    {
+      "file": "panels/05-documents.png",
+      "screen": "Документы",
+      "crop_box": [
+        130,
+        580,
+        408,
+        1086
+      ],
+      "size": [
+        278,
+        506
+      ],
+      "sha256": "2388844187bf5ba3f1ea79dfa58a0eb5c9ec2a9675f623606214d13571644329"
+    },
+    {
+      "file": "panels/06-tasks.png",
+      "screen": "Задачи",
+      "crop_box": [
+        428,
+        580,
+        707,
+        1086
+      ],
+      "size": [
+        279,
+        506
+      ],
+      "sha256": "0d4f9dccb3733a38fedb05a7ac66650f02f2e0cedea7a2034a7a4ab3a85adebf"
+    },
+    {
+      "file": "panels/07-discussions.png",
+      "screen": "Обсуждения",
+      "crop_box": [
+        736,
+        580,
+        1020,
+        1086
+      ],
+      "size": [
+        284,
+        506
+      ],
+      "sha256": "c78cda46a6d40d0ec93e46f020c58d7cf0e031ecde714022451824951e4cc397"
+    },
+    {
+      "file": "panels/08-budget.png",
+      "screen": "Бюджет",
+      "crop_box": [
+        1043,
+        580,
+        1316,
+        1086
+      ],
+      "size": [
+        273,
+        506
+      ],
+      "sha256": "9435fa61bd3f75f2f3418672c5476b55115fff4261e2353a09b9c8d87d1736c8"
+    }
+  ]
+}

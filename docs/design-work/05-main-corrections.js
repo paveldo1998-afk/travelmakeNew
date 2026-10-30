@@ -1,0 +1,28 @@
+await figma.setCurrentPageAsync(await figma.getNodeByIdAsync(S.pages.main));
+const mainFrames=await Promise.all(S.screens.map(s=>figma.getNodeByIdAsync(s.nodeId)));
+for(const f of mainFrames){
+ for(const t of f.findAllWithCriteria({types:['TEXT']}))if(t.textAutoResize==='NONE'&&t.width>150){t.textAutoResize='HEIGHT';mutatedNodeIds.push(t.id);}
+ const nav=f.children.find(n=>n.name==='Постоянная навигация');
+ for(const it of nav.children){const active=it.name.includes('Active');for(const v of it.findAllWithCriteria({types:['VECTOR']}))if(Array.isArray(v.strokes)&&v.strokes.length){v.strokes=v.strokes.map(p=>p.type==='SOLID'?figma.variables.setBoundVariableForPaint(p,'color',vars[active?'accent':'muted']):p);mutatedNodeIds.push(v.id);}}
+}
+for(const id of ['6:322','6:498','6:796','6:1077']){const f=await figma.getNodeByIdAsync(id);const h=f.children.find(n=>n.name.startsWith('Шапка'));const old=h.children[h.children.length-1];const idx=h.children.indexOf(old);const replacement=iconButton('plus','accent','onAccent');h.insertChild(idx,replacement);mutatedNodeIds.push(old.id,h.id);old.remove();}
+// All wrapped paragraph layers now hug their measured text height.
+const packingInner=await figma.getNodeByIdAsync('6:340');const pa=packingInner.children.find(n=>n.type==='INSTANCE'&&n.name.startsWith('Style=Primary'));if(pa){mutatedNodeIds.push(pa.id);pa.remove();}
+const timeline=(await figma.getNodeByIdAsync('6:516')).children.find(n=>n.type==='FRAME'&&n.children.length===4&&n.children.every(c=>c.type==='FRAME'&&c.width===358&&c.height===120));if(timeline)for(const row of timeline.children){row.resize(358,104);row.children[0].resize(48,100);row.children[row.children.length-1].resize(208,100);mutatedNodeIds.push(row.id);}
+const ti=await figma.getNodeByIdAsync('6:814');ti.itemSpacing=0;
+for(const t of ti.findAllWithCriteria({types:['TEXT']}))if(t.characters==='Ближайшие'){t.characters='Подготовка';mutatedNodeIds.push(t.id);}
+for(const n of [...ti.children]){if((n.type==='FRAME'&&n.children.some(c=>c.type==='TEXT'&&c.characters==='Без срока'))||(n.type==='INSTANCE'&&n.name==='TaskRow'&&n.findAllWithCriteria({types:['TEXT']}).some(t=>t.characters==='Выбрать сувениры'))||(n.type==='INSTANCE'&&n.name.startsWith('Style=Primary'))){mutatedNodeIds.push(n.id);n.remove();}}
+for(const n of ti.children)if(n.type==='INSTANCE'&&n.name==='TaskRow'){n.resize(358,64);const done=n.findAllWithCriteria({types:['TEXT']}).some(t=>t.characters.startsWith('Завершено ·'));if(done){const chk=n.findAllWithCriteria({types:['INSTANCE']}).find(k=>k.mainComponent.id===S.components['Checkbox/False']);if(chk){chk.swapComponent(comps['Checkbox/True']);mutatedNodeIds.push(chk.id);}}mutatedNodeIds.push(n.id);}
+const taskFilters=ti.children[0];const filterWidths=[60,106,94,74];for(let i=0;i<taskFilters.children.length;i++)taskFilters.children[i].resize(filterWidths[i],48);
+// Document search is a header action; full rows and addition fit in the viewport.
+const di=await figma.getNodeByIdAsync('6:653');const search=di.children.find(n=>n.type==='FRAME'&&n.findAllWithCriteria({types:['TEXT']}).some(t=>t.characters==='Найти документ'));if(search){mutatedNodeIds.push(search.id);search.remove();}
+for(const doc of di.findAllWithCriteria({types:['INSTANCE']}).filter(n=>n.name==='DocumentRow')){const values=doc.componentProperties;const statusKey=Object.keys(values).find(k=>k.split('#')[0]==='Status');const copyKey=Object.keys(values).find(k=>k.split('#')[0]==='LocalCopy');if(statusKey&&copyKey){const old=values[statusKey].value;const hasFile=old.includes('На устройстве');doc.setProperties({[statusKey]:hasFile?'Только мне':'Локально',[copyKey]:hasFile?'На устройстве':'Без файла'});mutatedNodeIds.push(doc.id);}}
+const dh=(await figma.getNodeByIdAsync('6:635')).children.find(n=>n.name.startsWith('Шапка'));const oldDocAction=dh.children[dh.children.length-1];dh.insertChild(dh.children.length-1,iconButton('search',null,'ink'));mutatedNodeIds.push(oldDocAction.id);oldDocAction.remove();
+const ci=await figma.getNodeByIdAsync('6:972');const cf=await figma.getNodeByIdAsync('6:954');const cb=await figma.getNodeByIdAsync('6:971');
+const composer=ci.children.find(n=>n.type==='FRAME'&&n.findAllWithCriteria({types:['TEXT']}).some(t=>t.characters==='Написать в деморежиме…'));if(composer){const dock=box(390,56,'HORIZONTAL','bg',4,0);dock.paddingLeft=16;dock.paddingRight=16;add(dock,composer);cf.insertChild(cf.children.length-1,dock);cb.resize(390,620);mutatedNodeIds.push(composer.id,cf.id,cb.id);}
+for(const n of ci.children){if(n.type==='FRAME'&&n.height===60){n.resize(358,76);for(const ch of n.children)if(ch.type==='FRAME'&&ch.width===314)ch.resize(314,76);mutatedNodeIds.push(n.id);}if(n.type==='FRAME'&&n.height===176){n.resize(358,160);mutatedNodeIds.push(n.id);}}
+const bi=await figma.getNodeByIdAsync('6:1095');bi.itemSpacing=4;for(const n of bi.children)if(n.type==='FRAME'&&n.height===52){n.resize(358,48);mutatedNodeIds.push(n.id);}
+for(const t of bi.findAllWithCriteria({types:['TEXT']}))if(t.characters==='Бюджета'){t.characters='Использовано';mutatedNodeIds.push(t.id);}
+// Explicit nearest-first ordering while retaining the two photographic cards.
+const trips=await figma.getNodeByIdAsync('6:41');const cards=trips.children.filter(n=>n.type==='FRAME'&&n.height===240);if(cards.length===2){const idx=trips.children.indexOf(cards[0]);trips.insertChild(idx,cards[1]);mutatedNodeIds.push(trips.id,cards[1].id);}
+return {createdNodeIds,mutatedNodeIds,fixes:['Text wraps now hug content','Visible context add actions in four headers','Document search moved to header','Discussion composer docked above navigation','Task filter fits 358px','Reduced task and budget row gaps','Inactive navigation icons muted'],screens:S.screens};

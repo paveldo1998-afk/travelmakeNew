@@ -1,0 +1,364 @@
+{
+  "createdNodeIds": [
+    "3:2",
+    "3:3",
+    "3:78",
+    "3:79",
+    "3:80",
+    "3:81",
+    "3:82",
+    "3:83",
+    "3:84",
+    "3:85",
+    "3:86",
+    "3:87",
+    "3:88",
+    "3:89",
+    "3:90",
+    "3:91",
+    "3:92",
+    "3:93",
+    "3:94",
+    "3:95",
+    "3:96",
+    "3:97",
+    "3:98",
+    "3:99",
+    "3:100",
+    "3:101",
+    "3:102"
+  ],
+  "mutatedNodeIds": [
+    "0:1"
+  ],
+  "pages": {
+    "system": "0:1",
+    "main": "3:2",
+    "extra": "3:3"
+  },
+  "referenceId": "3:82",
+  "collections": {
+    "primitive": "VariableCollectionId:3:4",
+    "color": "VariableCollectionId:3:5",
+    "layout": "VariableCollectionId:3:6"
+  },
+  "modes": {
+    "light": "3:1",
+    "dark": null
+  },
+  "modeLimitation": "Error: in addMode: Limited to 1 modes only",
+  "variables": {
+    "bg": "VariableID:3:28",
+    "card": "VariableID:3:29",
+    "soft": "VariableID:3:30",
+    "stroke": "VariableID:3:31",
+    "ink": "VariableID:3:32",
+    "muted": "VariableID:3:33",
+    "accent": "VariableID:3:34",
+    "accentSoft": "VariableID:3:35",
+    "success": "VariableID:3:36",
+    "successSoft": "VariableID:3:37",
+    "danger": "VariableID:3:38",
+    "dangerSoft": "VariableID:3:39",
+    "onAccent": "VariableID:3:40",
+    "space/0": "VariableID:3:41",
+    "space/4": "VariableID:3:42",
+    "space/8": "VariableID:3:43",
+    "space/12": "VariableID:3:44",
+    "space/16": "VariableID:3:45",
+    "space/20": "VariableID:3:46",
+    "space/24": "VariableID:3:47",
+    "space/32": "VariableID:3:48",
+    "space/48": "VariableID:3:49",
+    "radius/8": "VariableID:3:50",
+    "radius/12": "VariableID:3:51",
+    "radius/16": "VariableID:3:52",
+    "radius/24": "VariableID:3:53",
+    "radius/999": "VariableID:3:54",
+    "type/Brand/size": "VariableID:3:56",
+    "type/Brand/line": "VariableID:3:57",
+    "type/Title/size": "VariableID:3:59",
+    "type/Title/line": "VariableID:3:60",
+    "type/Heading/size": "VariableID:3:62",
+    "type/Heading/line": "VariableID:3:63",
+    "type/Body/size": "VariableID:3:65",
+    "type/Body/line": "VariableID:3:66",
+    "type/Label/size": "VariableID:3:68",
+    "type/Label/line": "VariableID:3:69",
+    "type/Small/size": "VariableID:3:71",
+    "type/Small/line": "VariableID:3:72",
+    "type/Caption/size": "VariableID:3:74",
+    "type/Caption/line": "VariableID:3:75",
+    "type/family": "VariableID:3:76"
+  },
+  "styles": {
+    "Brand": "S:e55935c5a39416a54e4f315a4eac06f92f5c87bc,",
+    "Title": "S:12c6cc1e969dd07a23d7467e5164923e79100b98,",
+    "Heading": "S:bc22816675dc34bc5d92cedf1ed6b43ac295e0f6,",
+    "Body": "S:6984920130fe3b23fda919ce3675df187af9ed01,",
+    "Label": "S:38134b3bf555a26b1b996ee08f0bdb2df59048c9,",
+    "Small": "S:861e2ec2be14776fbfcf1b54f4d65995477093d6,",
+    "Caption": "S:f52a12c3523086701c777765407cad115dd48f5d,"
+  },
+  "shadow": "S:7c808de1553647fa522a0396a8ed5f691e8ae819,",
+  "tokenCount": 63,
+  "components": {
+    "Icon/home": "4:453",
+    "Icon/packing": "4:457",
+    "Icon/plan": "4:461",
+    "Icon/docs": "4:465",
+    "Icon/money": "4:468",
+    "Icon/tasks": "4:472",
+    "Icon/chat": "4:476",
+    "Icon/arrow": "4:480",
+    "Icon/chevron": "4:483",
+    "Icon/down": "4:486",
+    "Icon/plus": "4:489",
+    "Icon/more": "4:492",
+    "Icon/search": "4:497",
+    "Icon/user": "4:501",
+    "Icon/people": "4:505",
+    "Icon/location": "4:509",
+    "Icon/plane": "4:513",
+    "Icon/shirt": "4:516",
+    "Icon/check": "4:519",
+    "Icon/clock": "4:522",
+    "Icon/lock": "4:526",
+    "Icon/download": "4:530",
+    "Icon/upload": "4:533",
+    "Icon/archive": "4:536",
+    "Icon/food": "4:540",
+    "Icon/transfer": "4:543",
+    "Icon/bell": "4:546",
+    "Icon/building": "4:549",
+    "Icon/settings": "4:552",
+    "Icon/warning": "4:556",
+    "Icon/wifi": "4:559",
+    "Icon/heart": "4:562",
+    "Button/Primary/Default": "4:565",
+    "Button/Primary/Focus": "4:567",
+    "Button/Primary/Disabled": "4:569",
+    "Button/Primary/Loading": "4:571",
+    "Button/Secondary/Default": "4:573",
+    "Button/Secondary/Focus": "4:575",
+    "Button/Secondary/Disabled": "4:577",
+    "Button/Secondary/Loading": "4:579",
+    "Button/Ghost/Default": "4:581",
+    "Button/Ghost/Focus": "4:583",
+    "Button/Ghost/Disabled": "4:585",
+    "Button/Ghost/Loading": "4:587",
+    "Button": "4:589",
+    "Chip/Default": "4:590",
+    "Chip/Selected": "4:592",
+    "Chip": "4:594",
+    "Badge/Neutral": "4:595",
+    "Badge/Success": "4:597",
+    "Badge/Accent": "4:599",
+    "Badge/Danger": "4:601",
+    "Badge": "4:603",
+    "Avatar": "4:604",
+    "NavItem/Default": "4:606",
+    "NavItem/Active": "4:612",
+    "NavItem": "4:619",
+    "Checkbox/False": "4:620",
+    "Checkbox/True": "4:622",
+    "Checkbox": "4:627",
+    "Field/Default": "4:628",
+    "Field/Focus": "4:633",
+    "Field/Error": "4:638",
+    "Field/Disabled": "4:643",
+    "Field": "4:648",
+    "Notice/Info": "4:649",
+    "Notice/Success": "4:652",
+    "Notice/Error": "4:655",
+    "Notice/Offline": "4:658",
+    "Notice": "4:661",
+    "ItemRow/missing": "4:662",
+    "ItemRow/home": "4:670",
+    "ItemRow/packed": "4:678",
+    "ItemRow": "4:689",
+    "ActionCard": "4:690",
+    "DocumentRow": "4:698",
+    "TaskRow": "4:711",
+    "DateTile": "4:721"
+  },
+  "fileKey": "W42BoaNlUbZcWUaoe9yYFa",
+  "sessionId": "58d841f0-6d2e-43cb-99aa-1f93f66ef609",
+  "scope": "full-library-and-approval-screens",
+  "step": "awaiting-editor-access",
+  "assets": [
+    {
+      "id": "4:725",
+      "name": "candidate-36664010.jpg"
+    },
+    {
+      "id": "4:726",
+      "name": "positano-coast.jpg"
+    },
+    {
+      "id": "4:727",
+      "name": "kyoto-alley.jpg"
+    },
+    {
+      "id": "4:728",
+      "name": "kiyomizu-dera.jpg"
+    },
+    {
+      "id": "4:729",
+      "name": "barcelona-guell.jpg"
+    },
+    {
+      "id": "4:730",
+      "name": "japanese-breakfast.jpg"
+    }
+  ],
+  "screens": [
+    {
+      "id": "01",
+      "title": "Мои поездки",
+      "nodeId": "6:37",
+      "bodyId": "6:40",
+      "innerId": "6:41",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "02",
+      "title": "Обзор поездки",
+      "nodeId": "6:150",
+      "bodyId": "6:153",
+      "innerId": "6:154",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "03",
+      "title": "Сборы",
+      "nodeId": "6:322",
+      "bodyId": "6:339",
+      "innerId": "6:340",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "04",
+      "title": "План по дням",
+      "nodeId": "6:498",
+      "bodyId": "6:515",
+      "innerId": "6:516",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "05",
+      "title": "Документы",
+      "nodeId": "6:635",
+      "bodyId": "6:652",
+      "innerId": "6:653",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "06",
+      "title": "Задачи",
+      "nodeId": "6:796",
+      "bodyId": "6:813",
+      "innerId": "6:814",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "07",
+      "title": "Обсуждения",
+      "nodeId": "6:954",
+      "bodyId": "6:971",
+      "innerId": "6:972",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "08",
+      "title": "Бюджет",
+      "nodeId": "6:1077",
+      "bodyId": "6:1094",
+      "innerId": "6:1095",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "mainImageNodes": [
+    {
+      "id": "6:93",
+      "file": "candidate-36664010.jpg",
+      "width": 358,
+      "height": 140
+    },
+    {
+      "id": "6:115",
+      "file": "positano-coast.jpg",
+      "width": 358,
+      "height": 140
+    },
+    {
+      "id": "6:141",
+      "file": "barcelona-guell.jpg",
+      "width": 72,
+      "height": 52
+    },
+    {
+      "id": "6:201",
+      "file": "candidate-36664010.jpg",
+      "width": 390,
+      "height": 260
+    },
+    {
+      "id": "6:595",
+      "file": "japanese-breakfast.jpg",
+      "width": 58,
+      "height": 82
+    },
+    {
+      "id": "6:605",
+      "file": "kiyomizu-dera.jpg",
+      "width": 58,
+      "height": 82
+    },
+    {
+      "id": "6:615",
+      "file": "kyoto-alley.jpg",
+      "width": 58,
+      "height": 82
+    },
+    {
+      "id": "6:625",
+      "file": "candidate-36664010.jpg",
+      "width": 58,
+      "height": 82
+    },
+    {
+      "id": "6:1037",
+      "file": "kyoto-alley.jpg",
+      "width": 310,
+      "height": 114
+    }
+  ],
+  "review": {
+    "status": "draft-with-observed-defects",
+    "exports": "docs/design-review",
+    "primaryFramesCreated": 8,
+    "additionalFramesCreated": 0,
+    "additionalSpecifications": 40,
+    "correctionsApplied": false,
+    "pwaCodeChanged": false,
+    "pwaBrowserTestsRun": false,
+    "blockingConditions": [
+      "Starter MCP tool-call allowance exhausted on creating account",
+      "Second connected account has not yet confirmed edit access"
+    ],
+    "pendingScripts": [
+      "05a-component-corrections.js",
+      "05-main-corrections.js",
+      "06-additional-screens.js"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+Проверенная исходная ветка PWA: paveldo1998-afk/travelmakeNew, main, 0423c614babf9f3b5c2e33e9e84da819334167e4.
+Визуальный источник: последнее изображение, предоставленное пользователем в текущей беседе. SHA256 — docs/ui-reference/manifest.json.
+
+Технические первичные источники для уточнения реализации:
+https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable
+https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria
+https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
+https://webkit.org/blog/17333/webkit-features-in-safari-26-0/
+https://developer.apple.com/documentation/usernotifications/sending-web-push-notifications-in-web-apps-and-browsers
+
+При реализации перепроверьте поддержку конкретных браузеров и устройств. Эти ссылки не подтверждают фактическое прохождение тестов будущего приложения.
