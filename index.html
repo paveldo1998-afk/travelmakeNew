@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f8fa" />
+  <meta name="description" content="Travel Finance — учёт денег в поездке" />
+  <title>Travel Finance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Trips list -->
+    <section id="view-trips" class="view">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Travel Finance</p>
+          <h1>Поездки</h1>
+        </div>
+        <button class="icon-btn" id="btn-new-trip" aria-label="Новая поездка">+</button>
+      </header>
+      <div id="trips-empty" class="empty hidden">
+        <div class="empty-orb">✈</div>
+        <h2>Пока нет поездок</h2>
+        <p>Создайте поездку и разложите наличные по счетам — как в CoinKeeper.</p>
+        <button class="primary" id="btn-empty-create">Создать поездку</button>
+      </div>
+      <div id="trips-list" class="trips-list"></div>
+    </section>
+
+    <!-- Trip ledger -->
+    <section id="view-ledger" class="view hidden">
+      <header class="topbar compact">
+        <button class="text-btn" id="btn-back">← Назад</button>
+        <h1 id="trip-title">Поездка</h1>
+        <button class="text-btn" id="btn-stats">Статистика</button>
+      </header>
+
+      <div class="summary">
+        <div>
+          <span>Баланс</span>
+          <strong id="sum-balance">0</strong>
+        </div>
+        <div>
+          <span>Расходы</span>
+          <strong id="sum-spent">0</strong>
+        </div>
+        <div>
+          <span>Валюта</span>
+          <strong id="sum-currency">¥</strong>
+        </div>
+      </div>
+
+      <p class="hint" id="drag-hint">Удерживайте счёт → сумма → перетащите на категорию или другой счёт</p>
+
+      <div class="section-label">Счета</div>
+      <div id="accounts-row" class="circles-row"></div>
+
+      <div class="section-label row-between">
+        <span>Расходы</span>
+        <button class="tiny" id="btn-add-category">+ категория</button>
+      </div>
+      <div id="categories-grid" class="circles-grid"></div>
+    </section>
+
+    <!-- Stats -->
+    <section id="view-stats" class="view hidden">
+      <header class="topbar compact">
+        <button class="text-btn" id="btn-stats-back">← К счетам</button>
+        <h1>Статистика</h1>
+        <span class="spacer"></span>
+      </header>
+      <div class="stats-cards">
+        <div class="stat-card">
+          <span>Остаток</span>
+          <strong id="stats-balance">0</strong>
+        </div>
+        <div class="stat-card accent">
+          <span>Потрачено</span>
+          <strong id="stats-spent">0</strong>
+        </div>
+      </div>
+      <div class="section-label">По счетам</div>
+      <div id="stats-accounts" class="stats-list"></div>
+      <div class="section-label">По категориям</div>
+      <div id="stats-chart" class="chart"></div>
+      <div id="stats-categories" class="stats-list"></div>
+    </section>
+  </div>
+
+  <!-- Create trip modal -->
+  <dialog id="modal-trip">
+    <form method="dialog" id="form-trip">
+      <h2>Новая поездка</h2>
+      <label>Название
+        <input name="name" value="Япония" required />
+      </label>
+      <label>Валюта
+        <select name="currency">
+          <option value="JPY">JPY ¥</option>
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+          <option value="RUB">RUB ₽</option>
+          <option value="THB">THB ฿</option>
+          <option value="KRW">KRW ₩</option>
+        </select>
+      </label>
+      <label>Всего наличных
+        <input name="total" type="number" min="1" value="100000" required />
+      </label>
+      <label>Беру с собой
+        <input name="withMe" type="number" min="0" value="10000" required />
+      </label>
+      <p class="form-note">Остальное попадёт на счёт «В номере».</p>
+      <div class="dialog-actions">
+        <button value="cancel" class="ghost">Отмена</button>
+        <button value="ok" class="primary" id="btn-create-trip">Создать</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Amount pad -->
+  <dialog id="modal-amount">
+    <div class="pad">
+      <p class="pad-title" id="pad-title">Сумма</p>
+      <div class="pad-value" id="pad-value">0</div>
+      <p class="pad-avail" id="pad-avail"></p>
+      <div class="pad-grid" id="pad-grid"></div>
+      <div class="dialog-actions">
+        <button class="ghost" id="pad-cancel">Отмена</button>
+        <button class="primary" id="pad-ok">Готово</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Floating coin -->
+  <div id="coin" class="coin hidden" aria-hidden="true">
+    <span id="coin-amount">0</span>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
