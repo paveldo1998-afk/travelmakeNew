@@ -1,0 +1,8 @@
+{
+  "mainCount": 8,
+  "extraCount": 18,
+  "errors": [],
+  "horizontalOverflows": [],
+  "environment": "Chrome via Playwright; isolated context; 390x844 captures; 320/360/390/412 at 100/200% root text in light/dark",
+  "note": "Text size test changes root font-size. Actual OS large-text and screen readers are not claimed."
+}

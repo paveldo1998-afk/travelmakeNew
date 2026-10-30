@@ -1,0 +1,11 @@
+{
+  "browser": "137.0.7151.120",
+  "checks": {
+    "installabilityErrors": []
+  },
+  "manifestUrl": "http://127.0.0.1:4173/travelmakeNew/manifest.webmanifest",
+  "manifestParseErrors": [],
+  "actualOSInstallationTested": false,
+  "isolatedPersistentProfile": true,
+  "note": "Chromium installability diagnostics in a new workspace-owned profile, not an incognito or user profile. Native OS installation and a real iPhone were not exercised."
+}

@@ -1,0 +1,229 @@
+{
+  "date": "2026-10-30",
+  "browser": "137.0.7151.120",
+  "engine": "Installed Google Chrome through Playwright",
+  "base": "http://127.0.0.1:4173/travelmakeNew/",
+  "isolatedContexts": true,
+  "syntheticDataOnly": true,
+  "cases": [
+    {
+      "name": "trip-create-validation-open-dates",
+      "status": "pass",
+      "durationMs": 756
+    },
+    {
+      "name": "trip-edit-preserves-financials",
+      "status": "pass",
+      "durationMs": 480
+    },
+    {
+      "name": "items-three-states-and-edit",
+      "status": "pass",
+      "durationMs": 776
+    },
+    {
+      "name": "templates-crud-independent-application",
+      "status": "pass",
+      "durationMs": 753
+    },
+    {
+      "name": "undated-task-event-same-id-and-independent-completion",
+      "status": "pass",
+      "durationMs": 1043
+    },
+    {
+      "name": "actual-file-upload-reload-delete-copy-and-record",
+      "status": "pass",
+      "durationMs": 1698
+    },
+    {
+      "name": "search-filter-hash-reload-and-back",
+      "status": "pass",
+      "durationMs": 855
+    },
+    {
+      "name": "finance-decimals-transfer-budget-overrun",
+      "status": "pass",
+      "durationMs": 936
+    },
+    {
+      "name": "dirty-form-cancel-escape-browser-back",
+      "status": "pass",
+      "durationMs": 495
+    },
+    {
+      "name": "indexeddb-quota-failure-keeps-input-no-false-success",
+      "status": "pass",
+      "durationMs": 479
+    },
+    {
+      "name": "cross-tab-conflict-comparison-explicit-resolution",
+      "status": "pass",
+      "durationMs": 4846
+    },
+    {
+      "name": "corrupt-legacy-explicit-error-no-demo-replacement",
+      "status": "pass",
+      "durationMs": 350
+    },
+    {
+      "name": "browser-migration-preserves-existing-records",
+      "status": "pass",
+      "durationMs": 334
+    },
+    {
+      "name": "production-demo-databases-remain-separated",
+      "status": "pass",
+      "durationMs": 547
+    },
+    {
+      "name": "compact-widths-large-text-dark-theme-keyboard-focus",
+      "status": "pass",
+      "durationMs": 1122
+    },
+    {
+      "name": "pwa-manifest-scoped-offline-shell-and-private-files",
+      "status": "pass",
+      "durationMs": 1753
+    },
+    {
+      "name": "demo-query-exit-survives-reload",
+      "status": "pass",
+      "durationMs": 311
+    },
+    {
+      "name": "item-long-press-visible-targets-safe-cancel-and-drop",
+      "status": "pass",
+      "durationMs": 2092
+    },
+    {
+      "name": "money-long-press-opens-prefilled-forms-without-early-mutation",
+      "status": "pass",
+      "durationMs": 2304
+    },
+    {
+      "name": "explicit-foreign-currency-rate",
+      "status": "pass",
+      "durationMs": 443
+    },
+    {
+      "name": "export-clear-import-real-ui",
+      "status": "pass",
+      "durationMs": 5000
+    },
+    {
+      "name": "standalone-detection-emulation-not-native-install",
+      "status": "pass",
+      "durationMs": 136
+    },
+    {
+      "name": "safe-real-service-worker-update-keeps-dirty-input-and-data",
+      "status": "pass",
+      "durationMs": 1739
+    }
+  ],
+  "notes": [
+    "Headless Chromium is not a real installed PWA or iPhone.",
+    "Keyboard Tab focus is automated; virtual mobile keyboard and TalkBack/VoiceOver are not claimed.",
+    "Service-worker update uses a test-only HTTP server with in-memory version substitution; production files are not changed."
+  ],
+  "responsive": [
+    {
+      "width": 320,
+      "body": 320,
+      "viewport": 320,
+      "content": 320,
+      "client": 320,
+      "font": "32px",
+      "dark": "dark"
+    },
+    {
+      "width": 360,
+      "body": 360,
+      "viewport": 360,
+      "content": 360,
+      "client": 360,
+      "font": "32px",
+      "dark": "dark"
+    },
+    {
+      "width": 412,
+      "body": 412,
+      "viewport": 412,
+      "content": 412,
+      "client": 412,
+      "font": "32px",
+      "dark": "dark"
+    }
+  ],
+  "pwa": {
+    "version": "2026-10-30-reference-3",
+    "offlineReady": true,
+    "scope": "http://127.0.0.1:4173/travelmakeNew/",
+    "manifest": {
+      "id": "/travelmakeNew/",
+      "name": "TravelOrganizer — органайзер поездок",
+      "short_name": "TravelOrganizer",
+      "description": "Поездки, сборы, план, документы и бюджет. Локальный режим разработки; серверные интеграции обозначены отдельно.",
+      "lang": "ru",
+      "dir": "ltr",
+      "start_url": "./#/trips",
+      "scope": "./",
+      "display": "standalone",
+      "display_override": [
+        "standalone",
+        "minimal-ui"
+      ],
+      "orientation": "any",
+      "background_color": "#FBF6EB",
+      "theme_color": "#AD440C",
+      "categories": [
+        "travel",
+        "productivity"
+      ],
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "./assets/icons/icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "./assets/icons/maskable-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "maskable"
+        },
+        {
+          "src": "./assets/icons/maskable-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
+        }
+      ]
+    },
+    "cacheEntryCount": 32
+  },
+  "standalone": {
+    "detected": true,
+    "method": "navigator.standalone emulated before load",
+    "nativeInstallationTested": false
+  },
+  "update": {
+    "initial": "acceptance-1",
+    "updated": "acceptance-2",
+    "foreignCacheRetained": true,
+    "dirtyInputRetainedUntilExplicitDiscard": true
+  },
+  "summary": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0
+  }
+}
