@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Travel Finance">
-  <rect width="64" height="64" rx="16" fill="#1a1d24"/>
-  <circle cx="32" cy="32" r="18" fill="none" stroke="#7dd3c0" stroke-width="4"/>
-  <circle cx="32" cy="32" r="8" fill="#7dd3c0"/>
-  <path d="M32 10v6M32 48v6M10 32h6M48 32h6" stroke="#7dd3c0" stroke-width="3" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TravelOrganizer">
+  <rect width="64" height="64" rx="16" fill="#164AD0"/>
+  <circle cx="32" cy="32" r="16" fill="none" stroke="#E2EAFF" stroke-width="4"/>
+  <circle cx="32" cy="32" r="6" fill="#E2EAFF"/>
+  <path d="M32 12v5M32 47v5M12 32h5M47 32h5" stroke="#E2EAFF" stroke-width="3" stroke-linecap="round"/>
 </svg>
