@@ -510,7 +510,7 @@
   }
 
   function modal(title, body, buttons = "") {
-    document.getElementById("dialog-body").innerHTML = `<h2 id="dialog-head">${h(title)}</h2>${body}${buttons ? `<div class="dialog-actions">${buttons}</div>` : ""}`;
+    document.getElementById("dialog-body").innerHTML = `<div class="sheet-handle" aria-hidden="true"></div><h2 id="dialog-head">${h(title)}</h2>${body}${buttons ? `<div class="dialog-actions">${buttons}</div>` : ""}`;
     document.getElementById("dialog").showModal();
   }
 
