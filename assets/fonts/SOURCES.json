@@ -1,0 +1,24 @@
+{
+  "fonts": [
+    {
+      "family": "Golos Text",
+      "file": "golos-text.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/golostext/GolosText%5Bwght%5D.ttf",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "GolosText-OFL.txt",
+      "changes": "Lossless webfont format conversion from upstream variable TTF using fontTools; full character set retained",
+      "sha256": "83131d1cabf731ec121506a0c7a0e9414408eda93cdb136919870e1f5fb22f45",
+      "verified": "2026-10-30"
+    },
+    {
+      "family": "Lora",
+      "file": "lora.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/lora/Lora%5Bwght%5D.ttf",
+      "license": "SIL Open Font License 1.1",
+      "license_file": "Lora-OFL.txt",
+      "changes": "Original upstream font bytes; no modification",
+      "sha256": "822a6621ccbe8d97d20ac88c1c41f5615c9c2c202eaa75f272cd452aac6475a7",
+      "verified": "2026-10-30"
+    }
+  ]
+}

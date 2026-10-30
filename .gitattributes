@@ -1,0 +1,7 @@
+*.pdf binary
+*.png binary
+*.jpg binary
+*.woff2 binary
+*.ttf binary
+# Preserve upstream licence text, including its original formatting.
+assets/fonts/*-OFL.txt text eol=lf whitespace=-blank-at-eol

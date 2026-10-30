@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TravelOrganizer">
-  <rect width="64" height="64" rx="16" fill="#164AD0"/>
-  <circle cx="32" cy="32" r="16" fill="none" stroke="#E2EAFF" stroke-width="4"/>
-  <circle cx="32" cy="32" r="6" fill="#E2EAFF"/>
-  <path d="M32 12v5M32 47v5M12 32h5M47 32h5" stroke="#E2EAFF" stroke-width="3" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#FBF6EB"/>
+  <g fill="none" stroke="#AD440C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="156" y="176" width="200" height="220" rx="38"/>
+    <path d="M214 176v-32a42 42 0 0 1 84 0v32M216 220v130M296 220v130M184 396v18M328 396v18"/>
+  </g>
+  <path d="m350 102 74-24-25 73-18-29-31-20Z" fill="#316842"/>
 </svg>

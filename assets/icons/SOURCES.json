@@ -1,0 +1,28 @@
+{
+  "author": "TravelOrganizer implementation",
+  "source": "Original geometric artwork; favicon.svg and assets/build-icons.py",
+  "external_artwork": false,
+  "meaning": "Travel suitcase and direction accent",
+  "icons": [
+    {
+      "file": "apple-touch-icon.png",
+      "sha256": "8d6003e76a334ca1416a3c91187dfe0222c833d8a92fdc5ff4c2ddff0272f976"
+    },
+    {
+      "file": "icon-192.png",
+      "sha256": "210cd1b60994a37586388017dddc7de95f82c03a4766c184f1bb2f525bcb3acb"
+    },
+    {
+      "file": "icon-512.png",
+      "sha256": "811e35872be913aae14c2f8f6af3436fbc134f4d83a0f68924373778abe532ea"
+    },
+    {
+      "file": "maskable-192.png",
+      "sha256": "7712d301b9601c1217684cdc748893263c85caad17c3a25461230c95f24eabb1"
+    },
+    {
+      "file": "maskable-512.png",
+      "sha256": "65eff5d84f6d525eb927c478c505914103a404a813e4840ab15797784979adad"
+    }
+  ]
+}

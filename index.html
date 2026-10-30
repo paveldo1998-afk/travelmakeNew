@@ -1,71 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#EFF4F8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="description" content="TravelOrganizer — мобильный мультитул для путешественников" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FBF6EB">
+  <meta name="description" content="TravelOrganizer — поездки, сборы, планы, документы и бюджет. Локальный режим разработки и отдельный демонстрационный режим.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="TravelOrganizer">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self'; object-src 'self' blob:; frame-src 'self' blob:; worker-src 'self'; base-uri 'self'; form-action 'self'">
   <title>TravelOrganizer</title>
-  <base href="/travelmakeNew/" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" sizes="180x180">
+  <link rel="preload" href="./assets/fonts/golos-text.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
 </head>
-<body class="signal">
-  <div class="device-stage">
-    <div class="app-shell" id="app">
-      <header class="app-header" id="app-header">
-        <h2 id="trip-heading">TravelOrganizer</h2>
-        <p class="trip-meta" id="trip-meta">Мультитул для путешественников</p>
-        <div class="header-actions" id="header-actions"></div>
-      </header>
-      <div class="page" id="content" role="main" aria-live="polite">
-        <div class="page-inner" id="boot-fallback">
-          <p class="cap">TravelOrganizer</p>
-          <h1 class="heading">Поездки</h1>
-          <p class="muted small">Сборы · план · документы · финансы</p>
-          <div class="toolbar">
-            <button type="button" class="btn primary full" id="boot-new-trip">Новая поездка</button>
-          </div>
-          <p class="hint" id="boot-hint">Загрузка…</p>
-          <noscript>
-            <div class="notice"><b>Нужен JavaScript</b><p>Включите JS в браузере, чтобы пользоваться приложением.</p></div>
-          </noscript>
-        </div>
-      </div>
-      <nav class="bottom-nav hidden" id="nav" aria-label="Разделы поездки"></nav>
-    </div>
+<body>
+  <a class="skip-link" href="#content">Перейти к содержимому</a>
+  <div id="app" class="app-shell">
+    <div id="mode-bar" class="mode-bar"></div>
+    <div id="pwa-status" class="pwa-status" role="status" aria-live="polite"></div>
+    <div id="update-banner" class="update-banner" hidden></div>
+    <header id="app-header" class="app-header"></header>
+    <main id="content" class="page" tabindex="-1">
+      <section class="boot-loading" aria-label="Загрузка приложения">
+        <h1>TravelOrganizer</h1>
+        <p>Открываем ваши поездки на этом устройстве…</p>
+        <noscript><p>Для работы органайзера включите JavaScript в настройках браузера.</p></noscript>
+      </section>
+    </main>
+    <nav id="nav" class="bottom-nav" aria-label="Разделы приложения"></nav>
   </div>
-
-  <dialog id="dialog" aria-labelledby="dialog-head">
-    <div class="dialog-inner" id="dialog-body"></div>
+  <dialog id="dialog" aria-labelledby="dialog-title" aria-modal="true">
+    <div id="dialog-body" class="dialog-inner"></div>
   </dialog>
-  <div id="toast" class="hidden" role="status"></div>
-  <div id="coin-ghost" class="coin-ghost hidden" aria-hidden="true"></div>
-  <div id="boot-error" class="boot-error hidden" role="alert"></div>
-
-  <script>
-    window.__toBootError = function (err) {
-      var el = document.getElementById("boot-error");
-      if (!el) return;
-      el.textContent = "Ошибка загрузки: " + (err && err.message ? err.message : String(err));
-      el.classList.remove("hidden");
-      var hint = document.getElementById("boot-hint");
-      if (hint) hint.textContent = "Не удалось запустить приложение. Обновите страницу.";
-    };
-    window.addEventListener("error", function (e) {
-      if (e && e.message) window.__toBootError(e.error || e.message);
-    });
-  </script>
-  <script src="app.js?v=3"></script>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="boot-error" class="boot-error" role="alert" hidden></div>
 </body>
 </html>

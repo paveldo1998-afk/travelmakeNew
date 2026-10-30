@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "trips": [
+    {
+      "id": "accept-trip",
+      "title": "Проверочная поездка",
+      "start": "",
+      "end": "",
+      "currency": "EUR",
+      "members": [
+        "Вы"
+      ],
+      "pins": [
+        "D1"
+      ],
+      "day": "2027-01-12",
+      "items": [
+        {
+          "id": "item-old",
+          "title": "Дорожный адаптер",
+          "quantity": 1,
+          "status": "home",
+          "category": "Техника",
+          "assignee": "Вы",
+          "taskId": "task-old"
+        },
+        {
+          "id": "item-rain",
+          "title": "Дождевик",
+          "quantity": 1,
+          "status": "missing",
+          "category": "Одежда",
+          "assignee": ""
+        }
+      ],
+      "tasks": [
+        {
+          "id": "task-old",
+          "title": "Купить дорожный адаптер",
+          "due": "",
+          "time": ""
+        }
+      ],
+      "events": [
+        {
+          "id": "event-old",
+          "title": "Заселение",
+          "date": "2027-01-12",
+          "time": "15:00",
+          "address": "Учебный адрес, 1",
+          "documentId": "D1"
+        }
+      ],
+      "docs": [
+        {
+          "id": "D1",
+          "title": "Существующая запись",
+          "audience": "Только мне",
+          "owner": "Вы",
+          "cached": true,
+          "eventId": "event-old"
+        }
+      ],
+      "accounts": [
+        {
+          "id": "with",
+          "name": "С собой",
+          "kind": "withMe",
+          "balance": 75.5
+        },
+        {
+          "id": "room",
+          "name": "В номере",
+          "kind": "storage",
+          "balance": 124.5
+        }
+      ],
+      "categories": [
+        {
+          "id": "food",
+          "name": "Еда",
+          "icon": "food",
+          "sort": 0
+        }
+      ],
+      "transactions": [
+        {
+          "id": "expense-old",
+          "type": "expense",
+          "amount": 24.5,
+          "fromId": "with",
+          "categoryId": "food",
+          "date": 1234567890
+        },
+        {
+          "id": "transfer-old",
+          "type": "transfer",
+          "amount": 50,
+          "fromId": "with",
+          "toId": "room",
+          "date": 1234567990
+        }
+      ],
+      "retained": {
+        "value": "kept"
+      }
+    },
+    {
+      "id": "second-trip",
+      "title": "Вторая проверочная поездка",
+      "start": "",
+      "end": "",
+      "currency": "EUR",
+      "members": [
+        "Вы"
+      ],
+      "pins": [
+        "D1"
+      ],
+      "day": "2027-01-12",
+      "items": [
+        {
+          "id": "item-old",
+          "title": "Дорожный адаптер",
+          "quantity": 1,
+          "status": "home",
+          "category": "Техника",
+          "assignee": "Вы",
+          "taskId": "task-old"
+        },
+        {
+          "id": "item-rain",
+          "title": "Дождевик",
+          "quantity": 1,
+          "status": "missing",
+          "category": "Одежда",
+          "assignee": ""
+        }
+      ],
+      "tasks": [
+        {
+          "id": "task-old",
+          "title": "Купить дорожный адаптер",
+          "due": "",
+          "time": ""
+        }
+      ],
+      "events": [
+        {
+          "id": "event-old",
+          "title": "Заселение",
+          "date": "2027-01-12",
+          "time": "15:00",
+          "address": "Учебный адрес, 1",
+          "documentId": "D1"
+        }
+      ],
+      "docs": [
+        {
+          "id": "D1",
+          "title": "Существующая запись",
+          "audience": "Только мне",
+          "owner": "Вы",
+          "cached": true,
+          "eventId": "event-old"
+        }
+      ],
+      "accounts": [
+        {
+          "id": "with",
+          "name": "С собой",
+          "kind": "withMe",
+          "balance": 75.5
+        },
+        {
+          "id": "room",
+          "name": "В номере",
+          "kind": "storage",
+          "balance": 124.5
+        }
+      ],
+      "categories": [
+        {
+          "id": "food",
+          "name": "Еда",
+          "icon": "food",
+          "sort": 0
+        }
+      ],
+      "transactions": [
+        {
+          "id": "expense-old",
+          "type": "expense",
+          "amount": 24.5,
+          "fromId": "with",
+          "categoryId": "food",
+          "date": 1234567890
+        },
+        {
+          "id": "transfer-old",
+          "type": "transfer",
+          "amount": 50,
+          "fromId": "with",
+          "toId": "room",
+          "date": 1234567990
+        }
+      ],
+      "retained": {
+        "value": "kept"
+      }
+    }
+  ],
+  "currentTripId": "accept-trip",
+  "dark": false
+}

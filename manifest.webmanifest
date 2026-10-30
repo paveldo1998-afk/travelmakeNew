@@ -1,0 +1,22 @@
+{
+  "id": "/travelmakeNew/",
+  "name": "TravelOrganizer — органайзер поездок",
+  "short_name": "TravelOrganizer",
+  "description": "Поездки, сборы, план, документы и бюджет. Локальный режим разработки; серверные интеграции обозначены отдельно.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "./#/trips",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#FBF6EB",
+  "theme_color": "#AD440C",
+  "categories": ["travel", "productivity"],
+  "icons": [
+    {"src": "./assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "./assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "./assets/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "./assets/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
