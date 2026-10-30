@@ -969,7 +969,14 @@
     if (e.target === e.currentTarget) closeModal();
   });
 
-  if (state.currentTripId && trip()) view = "home";
-  else view = "trips";
-  render();
+  try {
+    if (state.currentTripId && trip()) view = "home";
+    else view = "trips";
+    render();
+    const bootNew = document.getElementById("boot-new-trip");
+    if (bootNew) bootNew.addEventListener("click", () => formNewTrip());
+  } catch (err) {
+    if (typeof window.__toBootError === "function") window.__toBootError(err);
+    else console.error(err);
+  }
 })();
