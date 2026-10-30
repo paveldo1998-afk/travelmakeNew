@@ -2,7 +2,7 @@
 
 TravelOrganizer — работающий веб-клиент органайзера путешествий: поездки, сборы, план по дням, локальные документы, задачи и финансы. Интерфейс реализован на HTML/CSS/JavaScript по утверждённому [визуальному образцу](docs/ui-reference/approved-travel-reference.png), с фотографиями направлений, кремовыми поверхностями и терракотовыми действиями.
 
-Текущая работа ведётся в ветке `feature/pwa-reference-redesign`. Публикация GitHub Pages и `main` обновляются отдельно после приёмки. Публичный адрес проекта — [paveldo1998-afk.github.io/travelmakeNew](https://paveldo1998-afk.github.io/travelmakeNew/); до публикации этой ветки он может показывать предыдущую версию.
+Рабочая ветка — `feature/pwa-reference-redesign`. По запросу владельца версия перенесена в `main`, из корня которого публикуется GitHub Pages. Публичный адрес — [paveldo98.github.io/travelmakeNew](https://paveldo98.github.io/travelmakeNew/). [Заполненный деморежим](https://paveldo98.github.io/travelmakeNew/?demo=1#/trips) использует отдельные синтетические данные; [галерея браузерной проверки](https://paveldo98.github.io/travelmakeNew/docs/browser-checks/index.html) содержит реальные снимки и сравнение с референсом.
 
 ## Запуск
 
