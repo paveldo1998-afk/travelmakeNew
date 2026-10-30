@@ -2,7 +2,9 @@
 
 Веб-прототип учёта денег в поездке в духе CoinKeeper.
 
-**Демо:** https://paveldo1998-afk.github.io/travelmakeNew/
+**Сайт:** https://paveldo1998-afk.github.io/travelmakeNew/
+
+GitHub Pages уже включён: ветка `main`, папка `/ (root)`. После каждого push в `main` сайт обновляется сам.
 
 ## Как пользоваться
 
@@ -13,9 +15,9 @@
 
 Данные хранятся локально в `localStorage` браузера.
 
-## GitHub Pages
+## Если сайт не открывается
 
 1. Откройте [Settings → Pages](https://github.com/paveldo1998-afk/travelmakeNew/settings/pages)
 2. **Source:** Deploy from a branch
 3. Branch: `main` → folder: `/ (root)` → Save
-4. Через 1–2 минуты сайт: https://paveldo1998-afk.github.io/travelmakeNew/
+4. Подождите 1–2 минуты и откройте ссылку выше (именно `/travelmakeNew/`, не корень `*.github.io`)
