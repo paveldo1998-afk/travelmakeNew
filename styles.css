@@ -1,8 +1,6 @@
-/* TravelOrganizer — Signal design for GitHub Pages */
-@import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap");
-
+/* TravelOrganizer — Signal design for GitHub Pages (mobile-first) */
 :root {
-  --font: "Golos Text", system-ui, sans-serif;
+  --font: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 :root{font-family:var(--font);color-scheme:light}*{box-sizing:border-box}body{margin:0;font-family:var(--font);--bg:#EFF4F8;--ink:#122D3D;--muted:#4D6675;--stroke:#8196A3;--card:#fff;--accent:#164AD0;--low:#E2EAFF;--soft:#DCE7EF;--warning:#FFF0D0;--warningInk:#795000;--nav:#fff;--accentLight:#E2EAFF;background:var(--bg);color:var(--ink)}body.signal{--bg:#EFF4F8;--ink:#122D3D;--muted:#4D6675;--stroke:#8196A3;--card:#fff;--accent:#164AD0;--low:#E2EAFF;--soft:#DCE7EF;--warning:#FFF0D0;--warningInk:#795000;--nav:#fff;--accentLight:#E2EAFF}body.dark{--bg:#101D2B;--ink:#F4F7FF;--muted:#B1C6DA;--stroke:#708FA7;--card:#192B3D;--accent:#AFC8FF;--low:#223E6B;--soft:#1E3147;--warning:#503A20;--warningInk:#FFDB9C;--nav:#192B3D;--accentLight:#224273;color-scheme:dark}body.signal.dark{--bg:#101D2B;--ink:#F4F7FF;--muted:#B1C6DA;--stroke:#708FA7;--card:#192B3D;--accent:#AFC8FF;--low:#223E6B;--soft:#1E3147;--warning:#503A20;--warningInk:#FFDB9C;--nav:#192B3D;--accentLight:#224273}
@@ -11,6 +9,8 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-vis
 /* ===== Mobile-app shell (primary surface) ===== */
 html,body{
   height:100%;
+  min-height:100%;
+  min-height:100dvh;
   overflow:hidden;
   overscroll-behavior:none;
   -webkit-text-size-adjust:100%;
@@ -19,6 +19,20 @@ html,body{
 body{
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
+}
+.boot-error{
+  position:fixed;
+  left:12px;
+  right:12px;
+  top:max(12px,env(safe-area-inset-top));
+  z-index:200;
+  background:#7a1f1f;
+  color:#fff;
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:13px;
+  line-height:1.4;
+  box-shadow:0 8px 24px #0004;
 }
 button,a,.row-btn,.link-row,.circle-item,.nav-btn,.trip-card-btn{
   -webkit-tap-highlight-color:transparent;

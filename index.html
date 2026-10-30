@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#EFF4F8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -11,19 +11,37 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="description" content="TravelOrganizer — мобильный мультитул для путешественников" />
   <title>TravelOrganizer</title>
+  <base href="/travelmakeNew/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body class="signal">
   <div class="device-stage">
     <div class="app-shell" id="app">
       <header class="app-header" id="app-header">
-        <h2 id="trip-heading">Поездки</h2>
+        <h2 id="trip-heading">TravelOrganizer</h2>
         <p class="trip-meta" id="trip-meta">Мультитул для путешественников</p>
         <div class="header-actions" id="header-actions"></div>
       </header>
-      <div class="page" id="content" role="main" aria-live="polite"></div>
+      <div class="page" id="content" role="main" aria-live="polite">
+        <div class="page-inner" id="boot-fallback">
+          <p class="cap">TravelOrganizer</p>
+          <h1 class="heading">Поездки</h1>
+          <p class="muted small">Сборы · план · документы · финансы</p>
+          <div class="toolbar">
+            <button type="button" class="btn primary full" id="boot-new-trip">Новая поездка</button>
+          </div>
+          <p class="hint" id="boot-hint">Загрузка…</p>
+          <noscript>
+            <div class="notice"><b>Нужен JavaScript</b><p>Включите JS в браузере, чтобы пользоваться приложением.</p></div>
+          </noscript>
+        </div>
+      </div>
       <nav class="bottom-nav hidden" id="nav" aria-label="Разделы поездки"></nav>
     </div>
   </div>
@@ -33,7 +51,21 @@
   </dialog>
   <div id="toast" class="hidden" role="status"></div>
   <div id="coin-ghost" class="coin-ghost hidden" aria-hidden="true"></div>
+  <div id="boot-error" class="boot-error hidden" role="alert"></div>
 
-  <script src="app.js"></script>
+  <script>
+    window.__toBootError = function (err) {
+      var el = document.getElementById("boot-error");
+      if (!el) return;
+      el.textContent = "Ошибка загрузки: " + (err && err.message ? err.message : String(err));
+      el.classList.remove("hidden");
+      var hint = document.getElementById("boot-hint");
+      if (hint) hint.textContent = "Не удалось запустить приложение. Обновите страницу.";
+    };
+    window.addEventListener("error", function (e) {
+      if (e && e.message) window.__toBootError(e.error || e.message);
+    });
+  </script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
