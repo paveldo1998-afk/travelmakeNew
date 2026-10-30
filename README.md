@@ -15,4 +15,7 @@
 
 ## GitHub Pages
 
-Settings → Pages → Source: **Deploy from a branch** → Branch: `main` / `/ (root)`.
+1. Откройте [Settings → Pages](https://github.com/paveldo1998-afk/travelmakeNew/settings/pages)
+2. **Source:** Deploy from a branch
+3. Branch: `main` → folder: `/ (root)` → Save
+4. Через 1–2 минуты сайт: https://paveldo1998-afk.github.io/travelmakeNew/
