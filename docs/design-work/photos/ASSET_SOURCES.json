@@ -1,5 +1,5 @@
 {
-  "note": "Real photographs downloaded from Pexels. Sources and license verified using public primary pages. Photo choice follows the reference location, but these are replacement photographs rather than extracts of the user supplied collage. Pexels license permits app/website usage and modification. No endorsement claimed.",
+  "note": "Real photographs from Pexels and Wikimedia Commons. Sources and licenses are recorded per image. Photo choices follow the depicted locations and use real photographs rather than extracts of the user-supplied collage. See assets/photos/credits.html for author credits, licenses and changes. No endorsement claimed.",
   "assets": [
     {
       "file": "kyoto-yasaka.jpg",
@@ -119,6 +119,46 @@
       "bytes": 82906,
       "sha256": "dc4ae3baf2c81ad6666da7284a3326806c36483e34f3109b1c5009d4b1e7ad3f",
       "license_verified_date": "2026-10-30"
+    },
+    {
+      "file": "../../../assets/photos/kyoto-sunset.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Kyoto,_Japan_(Unsplash_UIN-pFfJ7c).jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Kyoto%2C_Japan_%28Unsplash_UIN-pFfJ7c%29.jpg",
+      "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Kyoto%2C_Japan_%28Unsplash_UIN-pFfJ7c%29.jpg/960px-Kyoto%2C_Japan_%28Unsplash_UIN-pFfJ7c%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Sorasak / boontohhgraphy",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "subject": "Yasaka Pagoda and traditional Kyoto street at sunset",
+      "intended_use": "Warm Kyoto trip cover",
+      "changes": "Wikimedia Commons native 960px thumbnail; CSS scaling and clipping in the interface; no generative alteration",
+      "width": 960,
+      "height": 641,
+      "bytes": 217306,
+      "sha256": "6774b371834f0175dd0e9a4aaa42e4cf34debcd0a6c379e10634f300e05e731a",
+      "license_verified_date": "2026-10-31",
+      "attribution": "Sorasak / boontohhgraphy, Kyoto, Japan, CC0 1.0; originally published 2017-05-05 before the Unsplash license change.",
+      "credit_page": "assets/photos/credits.html",
+      "asset_file": "kyoto-sunset.jpg"
+    },
+    {
+      "file": "../../../assets/photos/kyoto-lanterns.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:20111023_Gion1.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/20111023_Gion1.jpg",
+      "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/20111023_Gion1.jpg/960px-20111023_Gion1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Rainer Haeßner",
+      "license": "CC BY-SA 3.0 Unported",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "subject": "Lantern-lit traditional alley in Kyoto; source titled 20111023 Gion1",
+      "intended_use": "Warm Kyoto discussion card and street thumbnail",
+      "changes": "Wikimedia Commons native 960px thumbnail; CSS scaling and clipping in the interface; no generative alteration",
+      "width": 960,
+      "height": 638,
+      "bytes": 163862,
+      "sha256": "8b34723277f04273df48d265b36afe9ba0439b7a0a8f1ae2a8f608b5ee3d4609",
+      "license_verified_date": "2026-10-31",
+      "attribution": "Rainer Haeßner, 20111023 Gion1, CC BY-SA 3.0; native Wikimedia Commons thumbnail; CSS scaling/clipping.",
+      "credit_page": "assets/photos/credits.html",
+      "asset_file": "kyoto-lanterns.jpg"
     }
   ]
 }

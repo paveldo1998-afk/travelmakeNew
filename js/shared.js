@@ -23,7 +23,7 @@ const paths = {
  search:'<circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/>', user:'<circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/>',
  people:'<circle cx="9" cy="7" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M17 4a3 3 0 0 1 0 6M19 14a6 6 0 0 1 3 5v2"/>',
  location:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
- plane:'<path d="m22 2-7 20-4-9L2 9 22 2ZM11 13 22 2"/>', shirt:'<path d="m8 3-6 4 3 5 3-2v12h8V10l3 2 3-5-6-4a4 4 0 0 1-8 0Z"/>',
+ plane:'<path d="M12 2c-1 0-1.5 1-1.5 2.5V9L3 14v2l7.5-2v5L8 21v1l4-1 4 1v-1l-2.5-2v-5l7.5 2v-2l-7.5-5V4.5C13.5 3 13 2 12 2Z"/>', shirt:'<path d="m8 3-6 4 3 5 3-2v12h8V10l3 2 3-5-6-4a4 4 0 0 1-8 0Z"/>',
  check:'<path d="m5 12 4 4L19 6"/>', clock:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>',
  lock:'<rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 1 1 8 0v4M12 15v3"/>',
  download:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',upload:'<path d="M12 16V4m-5 5 5-5 5 5M4 16v5h16v-5"/>',
@@ -37,7 +37,7 @@ const paths = {
  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1 1M18 18l1 1M5 19l1-1M18 6l1-1"/>',moon:'<path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10Z"/>',
  phone:'<path d="m5 2 4 1 1 5-3 2a14 14 0 0 0 7 7l2-3 5 1 1 4c-1 7-12 0-16-4S-2 3 5 2Z"/>',copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M5 16H3V3h13v2"/>',
  pin:'<path d="m8 3 8 0-1 6 4 4v2H5v-2l4-4-1-6ZM12 15v7"/>', globe:'<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/>',
- image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="2"/><path d="m3 16 5-4 4 4 4-7 5 6"/>',send:'<path d="m22 2-7 20-4-9L2 9l20-7ZM11 13 11-4"/>',
+ image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="2"/><path d="m3 16 5-4 4 4 4-7 5 6"/>',send:'<path d="m22 2-7 20-4-9L2 9l20-7ZM11 13 22 2"/>',
  close:'<path d="m6 6 12 12M18 6 6 18"/>',refresh:'<path d="M20 7V2l-4 4a9 9 0 1 0 4 10M20 2h-5"/>',cloud:'<path d="M7 19h11a4 4 0 1 0-1-8A7 7 0 0 0 3 12a4 4 0 0 0 4 7Z"/>',
  wallet:'<path d="M3 5h17v16H3V5Zm0 0V3h14v2M20 10h-6v6h6M16 13h.01"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 10v7M12 6h.01"/>'
 };

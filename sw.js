@@ -1,6 +1,6 @@
 /* TravelOrganizer project-scoped public shell only. Personal records and Blob
  * files live in IndexedDB and are never placed in these public caches. */
-const VERSION = '2026-10-30-reference-3';
+const VERSION = '2026-10-31-reference-4';
 const PREFIX = 'travelorganizer-pwa-travelmakeNew-';
 const SHELL_CACHE = `${PREFIX}shell-${VERSION}`;
 const IMAGE_CACHE = `${PREFIX}images-${VERSION}`;
@@ -12,16 +12,16 @@ const SHELL = [
   'assets/fonts/golos-text.woff2', 'assets/fonts/lora.ttf',
   'assets/icons/icon-192.png', 'assets/icons/icon-512.png',
   'assets/icons/maskable-192.png', 'assets/icons/maskable-512.png',
-  'assets/icons/apple-touch-icon.png'
+  'assets/icons/apple-touch-icon.png', 'assets/photos/credits.html'
 ].map(path => new URL(path, ROOT).href);
 const IMAGES = [
   'kyoto.jpg', 'amalfi.jpg', 'barcelona.jpg', 'kyoto-alley.jpg', 'temple.jpg', 'breakfast.jpg',
   'candidate-36664010.jpg', 'positano-coast.jpg', 'barcelona-guell.jpg',
-  'kiyomizu-dera.jpg', 'japanese-breakfast.jpg'
+  'kiyomizu-dera.jpg', 'japanese-breakfast.jpg', 'kyoto-sunset.jpg', 'kyoto-lanterns.jpg'
 ].map(path => new URL(`assets/photos/${path}`, ROOT).href);
 const ALLOWED_SHELL = new Set(SHELL);
 const ALLOWED_IMAGES = new Set(IMAGES);
-const MAX_IMAGES = 12;
+const MAX_IMAGES = 14;
 
 self.addEventListener('install', event => {
   event.waitUntil((async () => {

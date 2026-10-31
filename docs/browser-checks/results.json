@@ -1,5 +1,7 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-10-31",
+  "timeZone": "Europe/Moscow",
+  "checkedAt": "2026-10-31T08:12:44.161Z",
   "browser": "137.0.7151.120",
   "engine": "Installed Google Chrome through Playwright",
   "base": "http://127.0.0.1:4173/travelmakeNew/",
@@ -9,117 +11,127 @@
     {
       "name": "trip-create-validation-open-dates",
       "status": "pass",
-      "durationMs": 756
+      "durationMs": 918
     },
     {
       "name": "trip-edit-preserves-financials",
       "status": "pass",
-      "durationMs": 480
+      "durationMs": 549
     },
     {
       "name": "items-three-states-and-edit",
       "status": "pass",
-      "durationMs": 776
+      "durationMs": 855
     },
     {
       "name": "templates-crud-independent-application",
       "status": "pass",
-      "durationMs": 753
+      "durationMs": 886
     },
     {
       "name": "undated-task-event-same-id-and-independent-completion",
       "status": "pass",
-      "durationMs": 1043
+      "durationMs": 1119
     },
     {
       "name": "actual-file-upload-reload-delete-copy-and-record",
       "status": "pass",
-      "durationMs": 1698
+      "durationMs": 1842
     },
     {
       "name": "search-filter-hash-reload-and-back",
       "status": "pass",
-      "durationMs": 855
+      "durationMs": 1021
     },
     {
       "name": "finance-decimals-transfer-budget-overrun",
       "status": "pass",
-      "durationMs": 936
+      "durationMs": 1304
     },
     {
       "name": "dirty-form-cancel-escape-browser-back",
       "status": "pass",
-      "durationMs": 495
+      "durationMs": 625
     },
     {
       "name": "indexeddb-quota-failure-keeps-input-no-false-success",
       "status": "pass",
-      "durationMs": 479
+      "durationMs": 569
     },
     {
       "name": "cross-tab-conflict-comparison-explicit-resolution",
       "status": "pass",
-      "durationMs": 4846
+      "durationMs": 4938
     },
     {
       "name": "corrupt-legacy-explicit-error-no-demo-replacement",
       "status": "pass",
-      "durationMs": 350
+      "durationMs": 454
     },
     {
       "name": "browser-migration-preserves-existing-records",
       "status": "pass",
-      "durationMs": 334
+      "durationMs": 349
     },
     {
       "name": "production-demo-databases-remain-separated",
       "status": "pass",
-      "durationMs": 547
+      "durationMs": 595
     },
     {
       "name": "compact-widths-large-text-dark-theme-keyboard-focus",
       "status": "pass",
-      "durationMs": 1122
+      "durationMs": 1208
+    },
+    {
+      "name": "reference-packing-preview-preserves-every-item-and-navigation",
+      "status": "pass",
+      "durationMs": 570
+    },
+    {
+      "name": "reference-document-actions-and-short-viewport-chat-remain-usable",
+      "status": "pass",
+      "durationMs": 1926
     },
     {
       "name": "pwa-manifest-scoped-offline-shell-and-private-files",
       "status": "pass",
-      "durationMs": 1753
+      "durationMs": 1758
     },
     {
       "name": "demo-query-exit-survives-reload",
       "status": "pass",
-      "durationMs": 311
+      "durationMs": 372
     },
     {
       "name": "item-long-press-visible-targets-safe-cancel-and-drop",
       "status": "pass",
-      "durationMs": 2092
+      "durationMs": 2167
     },
     {
       "name": "money-long-press-opens-prefilled-forms-without-early-mutation",
       "status": "pass",
-      "durationMs": 2304
+      "durationMs": 2288
     },
     {
       "name": "explicit-foreign-currency-rate",
       "status": "pass",
-      "durationMs": 443
+      "durationMs": 494
     },
     {
       "name": "export-clear-import-real-ui",
       "status": "pass",
-      "durationMs": 5000
+      "durationMs": 5088
     },
     {
       "name": "standalone-detection-emulation-not-native-install",
       "status": "pass",
-      "durationMs": 136
+      "durationMs": 168
     },
     {
       "name": "safe-real-service-worker-update-keeps-dirty-input-and-data",
       "status": "pass",
-      "durationMs": 1739
+      "durationMs": 1799
     }
   ],
   "notes": [
@@ -156,8 +168,113 @@
       "dark": "dark"
     }
   ],
+  "referencePacking": {
+    "total": 36,
+    "visibleBeforeExpand": 25,
+    "visibleAfterExpand": 36,
+    "filterAndSearchUncapped": true,
+    "backPreservesAllItemsContext": true,
+    "recordsUnchanged": true
+  },
+  "referenceUsability": {
+    "documents": [
+      {
+        "width": 320,
+        "font": 100,
+        "actionsChecked": 6,
+        "actionTargetsReachable": true,
+        "detailOpened": true
+      },
+      {
+        "width": 320,
+        "font": 200,
+        "actionsChecked": 6,
+        "actionTargetsReachable": true,
+        "detailOpened": true
+      },
+      {
+        "width": 390,
+        "font": 100,
+        "actionsChecked": 6,
+        "actionTargetsReachable": true,
+        "detailOpened": true
+      },
+      {
+        "width": 390,
+        "font": 200,
+        "actionsChecked": 6,
+        "actionTargetsReachable": true,
+        "detailOpened": true
+      }
+    ],
+    "chat": [
+      {
+        "width": 390,
+        "viewport": 844,
+        "font": "16px",
+        "flow": false,
+        "streamTop": 176,
+        "streamBottom": 695,
+        "composerTop": 705,
+        "composerBottom": 761,
+        "navTop": 771
+      },
+      {
+        "width": 390,
+        "viewport": 480,
+        "font": "16px",
+        "flow": false,
+        "streamTop": 176,
+        "streamBottom": 331,
+        "composerTop": 341,
+        "composerBottom": 397,
+        "navTop": 407
+      }
+    ],
+    "shortLargeText": [
+      {
+        "width": 390,
+        "height": 480,
+        "font": 200,
+        "flow": true,
+        "inputHit": {
+          "left": 31,
+          "right": 317,
+          "top": 271.328125,
+          "bottom": 331.71875,
+          "viewportWidth": 390,
+          "viewportHeight": 480,
+          "reachable": true
+        },
+        "sentAndPersisted": true
+      },
+      {
+        "width": 320,
+        "height": 480,
+        "font": 200,
+        "flow": true,
+        "inputHit": {
+          "left": 27,
+          "right": 251,
+          "top": 271.59375,
+          "bottom": 331.984375,
+          "viewportWidth": 320,
+          "viewportHeight": 480,
+          "reachable": true
+        },
+        "sentAndPersisted": true
+      }
+    ],
+    "votePersisted": true,
+    "draftSurvivedReloadAndVote": true,
+    "failedSendRetainedDraft": true,
+    "successfulSendClearedDraftAfterCommit": true,
+    "messagePersisted": true,
+    "resizeSimulationOnly": true,
+    "realOSKeyboardTested": false
+  },
   "pwa": {
-    "version": "2026-10-30-reference-3",
+    "version": "2026-10-31-reference-4",
     "offlineReady": true,
     "scope": "http://127.0.0.1:4173/travelmakeNew/",
     "manifest": {
@@ -208,7 +325,7 @@
         }
       ]
     },
-    "cacheEntryCount": 32
+    "cacheEntryCount": 35
   },
   "standalone": {
     "detected": true,
@@ -222,8 +339,8 @@
     "dirtyInputRetainedUntilExplicitDiscard": true
   },
   "summary": {
-    "total": 23,
-    "passed": 23,
+    "total": 25,
+    "passed": 25,
     "failed": 0
   }
 }

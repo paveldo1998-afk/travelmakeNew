@@ -1,5 +1,5 @@
 /** Project-scoped installation and update adapter. No data or form mutation. */
-export const PWA_VERSION = '2026-10-30-reference-3';
+export const PWA_VERSION = '2026-10-31-reference-4';
 export const IOS_INSTALL_INSTRUCTIONS = 'Откройте сайт в Safari. Нажмите «Поделиться» (в некоторых раскладках: меню страницы → «Поделиться»), затем «На экран Домой». Оставьте «Открывать как веб-приложение» включённым, если этот переключатель показан, и нажмите «Добавить».';
 export const INSTALL_HELP_SOURCE = 'https://support.apple.com/guide/iphone/iphea86e5236/ios';
 

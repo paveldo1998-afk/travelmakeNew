@@ -11,6 +11,12 @@ let storageInfo={},toastTimer,renderToken=0;
 const modeKey='travelorganizer.pwa.mode';
 const $=s=>document.querySelector(s);
 const clone=x=>structuredClone(x);
+const draftKey='travelorganizer.pwa.demo.chatDrafts';
+let chatDrafts=new Map(),draftPersisted=true;
+try{const saved=JSON.parse(sessionStorage.getItem(draftKey)||'[]');if(Array.isArray(saved))chatDrafts=new Map(saved.filter(p=>Array.isArray(p)&&typeof p[0]==='string'&&typeof p[1]==='string'));}catch{}
+function chatKey(){return `${mode}:${route?.tripId||''}:${route?.query?.get('context')||'general'}:${route?.query?.get('id')||''}`;}
+function persistDrafts(){try{if(chatDrafts.size)sessionStorage.setItem(draftKey,JSON.stringify([...chatDrafts]));else sessionStorage.removeItem(draftKey);draftPersisted=true;}catch{draftPersisted=false;}}
+function saveDraft(value){if(value)chatDrafts.set(chatKey(),value);else chatDrafts.delete(chatKey());persistDrafts();}
 function parseRoute(){
  const [path,search='']=(location.hash||'#/trips').slice(1).split('?');const parts=path.split('/').filter(Boolean).map(decodeURIComponent);
  if(parts[0]==='trip')return {page:parts[2]||'overview',tripId:parts[1],id:parts[3]||null,query:new URLSearchParams(search)};
@@ -26,12 +32,15 @@ function theme(){let choice=data?.settings?.theme||'system';try{choice=localStor
 function onlineStatus(){const el=$('#pwa-status');if(!el)return;const offline=!navigator.onLine;el.hidden=!offline;el.textContent=offline?'Без сети · локальные записи доступны на устройстве':'';}
 function modeBar(){const el=$('#mode-bar');el.innerHTML=mode==='demo'?`<span>Деморежим · синтетические данные</span><button data-action="leave-demo">Выйти из демо</button>`:`<span>Локальный режим разработки</span><button data-action="show-integration" data-feature="auth">Аккаунт не подключён</button>`;}
 async function render(){
- if(!data)return;route=parseRoute();const token=++renderToken;const t=trip();if(t)lastTripId=t.id;
+ if(!data)return;const chatScroll=document.body.dataset.page==='discussions'&&location.hash===lastHash?$('.conversation-stream')?.scrollTop||0:0;route=parseRoute();const token=++renderToken;const t=trip();if(t)lastTripId=t.id;
  if(route.tripId&&!t){$('#app-header').innerHTML=`<a class="icon-btn" href="#/trips" aria-label="К поездкам">${icon('arrow')}</a><h1>Поездка не найдена</h1>`;$('#content').innerHTML=`<section class="empty-state"><h2>Запись недоступна</h2><p>Возможно, поездка удалена в другой вкладке. Остальные записи сохранены.</p><a class="btn primary" href="#/trips">Мои поездки</a></section>`;$('#nav').innerHTML='';return;}
  theme();modeBar();onlineStatus();fileURLs.forEach(u=>URL.revokeObjectURL(u));fileURLs=[];
  const view=renderApp({data,trip:t,route,mode,online:navigator.onLine,storageInfo,pwa:pwa?.state||{}});
  $('#app-header').innerHTML=view.header;$('#content').innerHTML=view.content;$('#nav').innerHTML=view.nav;$('#nav').hidden=!view.nav;
  document.body.dataset.page=route.page;document.title=`${t?t.title+' · ':''}TravelOrganizer`;
+ const composer=$('.chat-composer input');if(composer)composer.value=chatDrafts.get(chatKey())||'';
+ const conversation=$('.conversation-stream');if(conversation)conversation.scrollTop=chatScroll;
+ measureLayout();
  if(location.hash!==lastHash){$('#content').scrollTop=0;lastHash=location.hash;}
  if(route.page==='document'&&t){
   const d=t.docs.find(d=>d.id===route.id);const mount=$('#file-preview');
@@ -52,11 +61,11 @@ async function action(button){
  if(a==='theme'){const chosen=button.dataset.theme||'system';await commit(d=>{d.settings={...d.settings,theme:chosen};});try{localStorage.setItem('travelorganizer.pwa.theme',chosen);}catch{}return render();}
  if(a==='export-data')return exportData();
  if(a==='import-data'){const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=async()=>{try{const f=input.files[0];if(!f)return;if(f.size>80*1024*1024)throw new Error('Файл экспорта больше 80 МБ.');const payload=JSON.parse(await f.text());data=await store.importData(payload);await render();toast('Данные импортированы на устройство.');}catch(error){errorNotice(error);}};input.click();return;}
- if(a==='clear-data'){if(!await forms.confirm('Очистить текущие локальные данные?','Сначала будет скачан экспорт. Будут удалены записи и файлы текущего режима TravelOrganizer. Исходная копия прежнего хранилища для восстановления останется. Другие приложения и отдельная демонстрационная база не затрагиваются.',{accept:'Экспортировать и очистить',danger:true}))return;await exportData();await store.clearOwnData();data=store.data;navigate('#/trips');return render();}
+ if(a==='clear-data'){if(!await forms.confirm('Очистить текущие локальные данные?','Сначала будет скачан экспорт. Будут удалены записи и файлы текущего режима TravelOrganizer. Исходная копия прежнего хранилища для восстановления останется. Другие приложения и отдельная демонстрационная база не затрагиваются.',{accept:'Экспортировать и очистить',danger:true}))return;await exportData();await store.clearOwnData();for(const key of chatDrafts.keys())if(key.startsWith(mode+':'))chatDrafts.delete(key);persistDrafts();data=store.data;navigate('#/trips');return render();}
  if(a==='persist-storage'){const allowed=await navigator.storage?.persist?.();toast(allowed?'Браузер предоставил устойчивое хранение. Экспорт всё равно нужен.':'Браузер не предоставил устойчивое хранение. Данные доступны, сохраняйте экспорт.');return;}
  if(a==='install'){const result=await pwa?.install();if(result?.status==='instructions')showInstall();return;}
  if(a==='check-update'){const result=await pwa?.checkUpdate();if(['error','unavailable'].includes(result?.status))toast(result.message||'Проверка обновлений недоступна.',true);else if(result?.status==='current')toast('Установлена актуальная версия.');return;}
- if(a==='apply-update'){if(forms.isOpen&&!await forms.requestClose())return;await pwa.applyUpdate();return;}
+ if(a==='apply-update'){if(forms.isOpen&&!await forms.requestClose())return;if($('.chat-composer input')?.value&&!draftPersisted){if(!await forms.confirm('Обновить без черновика?','Браузер не смог сохранить введённое сообщение. Скопируйте его перед обновлением или явно подтвердите потерю этого черновика.',{accept:'Обновить без черновика',danger:true}))return;}await pwa.applyUpdate();return;}
  if(a==='notifications'){if(!('Notification'in window))return forms.integration('push');const permission=await Notification.requestPermission();await commit(d=>{d.settings={...d.settings,notificationPermission:permission};});forms.show('Уведомления',`<p>Разрешение браузера: <strong>${esc(permission==='granted'?'разрешены':permission==='denied'?'отказано':'не выбрано')}</strong>.</p><p>Фоновая доставка и серверное расписание не подключены. Уведомления при закрытом приложении не отправляются.</p>`);return;}
  if(a==='copy-address'){const text=button.dataset.address||trip()?.events.find(v=>v.id===id)?.address||trip()?.contacts?.find(v=>v.id===id)?.address;if(!text)throw new Error('Адрес не указан.');try{await navigator.clipboard.writeText(text);toast('Адрес скопирован.');}catch{forms.show('Скопировать адрес',`<p class="selectable">${esc(text)}</p><p>Браузер запретил буфер обмена. Выделите и скопируйте адрес.</p>`);}return;}
  if(a==='toggle-task'){await commit(d=>{const t=d.trips.find(t=>t.id===route.tripId);const x=t.tasks.find(x=>x.id===id);if(!x)throw new Error('Задача не найдена.');x.completed=!x.completed;x.completedAt=x.completed?new Date().toISOString():null;});return render();}
@@ -71,7 +80,7 @@ async function action(button){
  if(a==='delete-transaction'){if(!await forms.confirm('Отменить финансовую операцию?','Сумма будет возвращена на исходный счёт, а перевод вычтен у получателя. Изменение попадёт в историю.',{accept:'Отменить операцию'}))return;await commit(d=>{const t=d.trips.find(t=>t.id===route.tripId);deleteFinancialTransaction(t,id);(t.history||=[]).push({id:uid(),author:'На этом устройстве',action:'Отменена финансовая операция',time:new Date().toISOString()});});return render();}
  const deleting={'delete-item':['items','packing'],'delete-event':['events','plan'],'delete-task':['tasks','tasks'],'delete-document':['docs','documents'],'delete-contact':['contacts','contacts']};
  if(deleting[a]){const [list,parent]=deleting[a];if(!await forms.confirm('Удалить запись?','Будет удалена только выбранная запись и её локальные связи. Связанные задачи и события останутся.',{accept:'Удалить',danger:true}))return;await commit(d=>{const t=d.trips.find(t=>t.id===route.tripId);t[list]=(t[list]||[]).filter(v=>v.id!==id);if(list==='docs'){t.pins=t.pins.filter(v=>v!==id);t.events.forEach(v=>{if(v.documentId===id)v.documentId='';});}if(list==='tasks')t.items.forEach(v=>{if(v.taskId===id)v.taskId='';});if(list==='events')t.docs.forEach(v=>{if(v.eventId===id)v.eventId='';});},list==='docs'?{fileDelete:{tripId:route.tripId,docId:id}}:{});navigate(href(route.tripId,parent));return render();}
- if(a==='demo-message'){if(mode!=='demo')return forms.integration('sync');const input=$('[name="message"]')||$('#message-input');const text=String(input?.value||'').trim();if(!text)return;await commit(d=>{const t=d.trips.find(t=>t.id===route.tripId);(t.messages||=[]).push({id:uid(),author:'Вы',text,time:new Date().toISOString(),contextType:route.query.get('context')||'general',contextId:route.query.get('id')||''});});return render();}
+ if(a==='demo-message'){if(mode!=='demo')return forms.integration('sync');const input=$('[name="message"]')||$('#message-input');const text=String(input?.value||'').trim();if(!text)return;await commit(d=>{const t=d.trips.find(t=>t.id===route.tripId);(t.messages||=[]).push({id:uid(),author:'Вы',text,time:new Date().toISOString(),contextType:route.query.get('context')||'general',contextId:route.query.get('id')||''});});saveDraft('');await render();const stream=$('.conversation-stream');if(stream)stream.scrollTop=stream.scrollHeight;return;}
  if(a==='demo-vote'){if(mode!=='demo')return forms.integration('sync');await commit(d=>{const p=d.trips.find(t=>t.id===route.tripId).poll;if(!p)return;const choice=button.dataset.option||id;if(p.myVote){const old=p.options.find(v=>v.id===p.myVote);if(old)old.votes=Math.max(0,(old.votes||0)-1);}const o=p.options.find(v=>v.id===choice);if(o){o.votes=(o.votes||0)+1;p.myVote=choice;}});return render();}
  if(a==='clear-filters'){navigate(href(route.tripId,route.page));return;}
  if(a==='retry-boot')return boot();
@@ -80,14 +89,25 @@ async function action(button){
 document.addEventListener('click',e=>{if(e.target.closest('.skip-link')){e.preventDefault();$('#content').focus();return;}const b=e.target.closest('[data-action]');if(!b||b.disabled)return;e.preventDefault();Promise.resolve(action(b)).catch(errorNotice);});
 document.addEventListener('submit',e=>{if(e.target.matches('[data-demo-message],[data-chat-form]')){e.preventDefault();action({dataset:{action:'demo-message'}}).catch(errorNotice);}if(e.target.matches('[data-search-form]'))e.preventDefault();});
 let searchTimer;
+document.addEventListener('input',e=>{if(e.target.matches('.chat-composer input'))saveDraft(e.target.value);});
 document.addEventListener('input',e=>{if(!e.target.matches('[data-search]'))return;const input=e.target;clearTimeout(searchTimer);searchTimer=setTimeout(()=>{const query=new URLSearchParams(route.query);if(input.value)query.set('q',input.value);else query.delete('q');const hash=href(route.tripId,route.page,route.id,query);history.replaceState({},'',hash);const name=input.dataset.search,position=input.selectionStart;render().then(()=>{const x=document.querySelector(`[data-search="${CSS.escape(name)}"]`);if(x){x.focus();x.setSelectionRange(position,position);}});},140);});
 document.addEventListener('change',e=>{if(!e.target.matches('[data-filter]'))return;const q=new URLSearchParams(route.query);const key=e.target.dataset.filter;q.set(key,e.target.value);if(key==='day')q.delete('undated');navigate(href(route.tripId,route.page,route.id,q));});
 window.addEventListener('hashchange',()=>render().catch(errorNotice));
 window.addEventListener('popstate',async()=>{if(forms?.isOpen&&!popClosing){popClosing=true;const closed=await forms.requestClose();if(!closed)history.pushState({editor:true},'',location.href);popClosing=false;}});
-window.addEventListener('beforeunload',e=>{if(forms?.isDirty){e.preventDefault();e.returnValue='';}});
+window.addEventListener('beforeunload',e=>{if(forms?.isDirty||(!draftPersisted&&$('.chat-composer input')?.value)){e.preventDefault();e.returnValue='';}});
 window.addEventListener('online',onlineStatus);window.addEventListener('offline',onlineStatus);
-const viewport=window.visualViewport;viewport?.addEventListener('resize',()=>{document.body.classList.toggle('keyboard-open',viewport.height<window.innerHeight*.75&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName));});
-if('ResizeObserver'in window)new ResizeObserver(()=>{document.documentElement.style.setProperty('--nav-height',$('#nav').getBoundingClientRect().height+'px');}).observe($('#nav'));
+const viewport=window.visualViewport;
+function measureLayout(){
+ const style=document.documentElement.style;
+ for(const [id,variable]of [['#nav','--nav-height'],['#app-header','--header-height'],['#mode-bar','--mode-height']])style.setProperty(variable,($(id)?.getBoundingClientRect().height||0)+'px');
+ const height=viewport?.height||window.innerHeight;style.setProperty('--viewport-height',height+'px');
+ const available=height-['#nav','#app-header','#mode-bar'].reduce((sum,id)=>sum+($(id)?.getBoundingClientRect().height||0),0);
+ document.body.classList.toggle('chat-flow',available<Math.max(240,9*parseFloat(getComputedStyle(document.documentElement).fontSize)));
+}
+viewport?.addEventListener('resize',()=>{document.body.classList.toggle('keyboard-open',viewport.height<window.innerHeight*.75&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName));measureLayout();});
+window.addEventListener('resize',measureLayout);
+if('ResizeObserver'in window){const layoutObserver=new ResizeObserver(measureLayout);for(const id of ['#nav','#app-header','#mode-bar'])layoutObserver.observe($(id));}
+measureLayout();
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);
 
 async function boot(){

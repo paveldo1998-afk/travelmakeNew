@@ -15,7 +15,7 @@ await mkdir(path.join(root, 'tests/fixtures'), { recursive: true });
 const selected = process.argv.indexOf('--only');
 const only = selected >= 0 ? new Set(process.argv[selected + 1].split(',')) : null;
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const report = { date: '2026-10-30', browser: browser.version(), engine: 'Installed Google Chrome through Playwright', base,
+const report = { date: new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()), timeZone:'Europe/Moscow', checkedAt:new Date().toISOString(), browser: browser.version(), engine: 'Installed Google Chrome through Playwright', base,
   isolatedContexts: true, syntheticDataOnly: true, cases: [], notes: ['Headless Chromium is not a real installed PWA or iPhone.', 'Keyboard Tab focus is automated; virtual mobile keyboard and TalkBack/VoiceOver are not claimed.', 'Service-worker update uses a test-only HTTP server with in-memory version substitution; production files are not changed.'] };
 const persist = () => writeFile(path.join(out, 'results.json'), JSON.stringify(report, null, 2), 'utf8');
 const photo = async (page, name) => { await page.screenshot({ path: path.join(scenarios, name + '.png'), fullPage: false }); };
@@ -91,6 +91,157 @@ await run('browser-migration-preserves-existing-records',async()=>{const {ctx,pa
 await run('production-demo-databases-remain-separated',async()=>{const {ctx,page}=await context();try{await ready(page);await go(page,'#/profile');await action(page,'choose-demo');await expect(page.locator('#mode-bar')).toContainText('Деморежим');assert.equal((await state(page,true)).trips.length,3);await action(page,'leave-demo');await expect(page.locator('#mode-bar')).toContainText('Локальный режим');assert.deepEqual((await state(page)).trips.map(t=>t.id),['accept-trip','second-trip']);await page.reload();await ready(page);await expect(page.locator('#mode-bar')).toContainText('Локальный режим');await photo(page,'local-profile-integrations-explicit');}finally{await ctx.close();}});
 
 await run('compact-widths-large-text-dark-theme-keyboard-focus',async()=>{const {ctx,page}=await context({seed:false,url:base+'?demo=1#/trip/demo-japan/packing'});try{await ready(page);const metrics=[];for(const width of [320,360,412]){await page.setViewportSize({width,height:844});await go(page,'#/settings');await page.locator('[data-action=theme][data-theme=dark]').click();await go(page,'#/trip/demo-japan/packing');await page.addStyleTag({content:'html { font-size: 200% !important; }'});const result=await page.evaluate(()=>({body:document.body.scrollWidth,viewport:innerWidth,content:document.querySelector('#content').scrollWidth,client:document.querySelector('#content').clientWidth,font:getComputedStyle(document.body).fontSize,dark:document.documentElement.dataset.theme}));assert.ok(result.body<=width+1,JSON.stringify(result));assert.ok(result.content<=result.client+1,JSON.stringify(result));assert.equal(result.dark,'dark');metrics.push({width,...result});await action(page,'new-item');await page.keyboard.press('Tab');assert.ok(await page.locator('#dialog').evaluate(d=>d.contains(document.activeElement)));await photo(page,`compact-${width}-dark-large-text-form`);await page.locator('#dialog [data-form-close]').first().click();await expect(page.locator('#dialog')).not.toHaveAttribute('open','');}report.responsive=metrics;}finally{await ctx.close();}});
+
+await run('reference-packing-preview-preserves-every-item-and-navigation',async()=>{
+ const {ctx,page}=await context({seed:false,url:base+'?demo=1#/trip/demo-japan/packing'});
+ try{
+  await ready(page);
+  const trip=(await state(page,true)).trips.find(t=>t.id==='demo-japan');
+  const expectedIds=trip.items.map(item=>item.id).sort();
+  const ids=()=>page.locator('[data-long-item]').evaluateAll(rows=>rows.map(row=>row.dataset.longItem).sort());
+  assert.equal(expectedIds.length,36);
+  assert.deepEqual(await ids(),expectedIds);
+  await expect(page.locator('.state-tab')).toHaveCount(3);
+  await expect(page.locator('.packing-all')).toHaveAttribute('aria-current','true');
+  assert.ok(await page.locator('.packing-more:not([open])').count()>0);
+  const hiddenItem=page.locator('.packing-more:not([open]) [data-long-item]').first();
+  const hiddenId=await hiddenItem.getAttribute('data-long-item');
+  const hiddenTitle=trip.items.find(item=>item.id===hiddenId).title;
+  const visibleBefore=await page.locator('[data-long-item]:visible').count();
+  assert.ok(visibleBefore>0&&visibleBefore<expectedIds.length);
+  await photo(page,'reference-packing-preview-all-three-states');
+  const summaries=page.locator('.packing-more > summary');
+  for(let i=0;i<await summaries.count();i++)await summaries.nth(i).click();
+  await expect(page.locator('[data-long-item]:visible')).toHaveCount(expectedIds.length);
+  assert.deepEqual(await ids(),expectedIds);
+  const contextHash=await page.evaluate(()=>location.hash);
+  await page.locator(`[data-long-item="${hiddenId}"] .item-title`).click();
+  await expect(page).toHaveURL(new RegExp('/item/'+hiddenId));
+  await expect(page.locator('#content')).toContainText(hiddenTitle);
+  await page.goBack();
+  await expect(page.locator('.packing-all')).toHaveAttribute('aria-current','true');
+  assert.equal(await page.evaluate(()=>location.hash),contextHash);
+  assert.deepEqual(await ids(),expectedIds);
+  await go(page,'#/trip/demo-japan/packing?state=home');
+  const home=trip.items.filter(item=>item.status==='home');
+  await expect(page.locator('.state-tab[aria-current]')).toContainText('Дома');
+  await expect(page.locator('[data-long-item]:visible')).toHaveCount(home.length);
+  await expect(page.locator('.packing-more')).toHaveCount(0);
+  assert.deepEqual(await ids(),home.map(item=>item.id).sort());
+  const query='а';
+  await go(page,'#/trip/demo-japan/packing?state=all&q='+encodeURIComponent(query));
+  await expect(page.locator('[data-search=packing]')).toHaveValue(query);
+  const matching=trip.items.filter(item=>`${item.title} ${item.category}`.toLocaleLowerCase('ru').includes(query));
+  await expect(page.locator('[data-long-item]:visible')).toHaveCount(matching.length);
+  await expect(page.locator('.packing-more')).toHaveCount(0);
+  assert.deepEqual(await ids(),matching.map(item=>item.id).sort());
+  const after=(await state(page,true)).trips.find(t=>t.id==='demo-japan');
+  assert.deepEqual(after.items,trip.items);
+  report.referencePacking={total:expectedIds.length,visibleBeforeExpand:visibleBefore,visibleAfterExpand:expectedIds.length,filterAndSearchUncapped:true,backPreservesAllItemsContext:true,recordsUnchanged:true};
+ }finally{await ctx.close();}
+});
+
+await run('reference-document-actions-and-short-viewport-chat-remain-usable',async()=>{
+ const {ctx,page}=await context({seed:false,url:base+'?demo=1#/trip/demo-japan/documents'});
+ try{
+  await ready(page);
+  const documents=[];
+  for(const width of [320,390])for(const font of [100,200]){
+   await page.setViewportSize({width,height:844});
+   await go(page,'#/trip/demo-japan/documents');
+   await expect(page.locator('.document-row')).toHaveCount(6);
+   await page.evaluate(async font=>{document.documentElement.style.fontSize=font+'%';await document.fonts.ready;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));},font);
+   const actions=page.locator('.document-row > a.icon-btn');
+   for(let i=0;i<await actions.count();i++){
+    const action=actions.nth(i);
+    await action.evaluate(el=>el.scrollIntoView({block:'center',inline:'nearest'}));
+    const bounds=await action.evaluate(el=>{const box=el.getBoundingClientRect();const atCenter=document.elementFromPoint(box.x+box.width/2,box.y+box.height/2);return {left:box.left,right:box.right,top:box.top,bottom:box.bottom,width:box.width,height:box.height,viewport:innerWidth,reachable:atCenter===el||el.contains(atCenter)};});
+    assert.ok(bounds.left>=-1&&bounds.right<=width+1,JSON.stringify({testWidth:width,font,row:i,...bounds}));
+    assert.ok(bounds.width>=47&&bounds.height>=47,JSON.stringify({testWidth:width,font,row:i,...bounds}));
+    assert.equal(bounds.reachable,true,JSON.stringify({testWidth:width,font,row:i,...bounds}));
+   }
+   await actions.first().click();
+   await page.waitForFunction(()=>document.body.dataset.page==='document');
+   await expect(page.locator('#content')).toContainText('Перелёт в Токио');
+   documents.push({width,font,actionsChecked:6,actionTargetsReachable:true,detailOpened:true});
+  }
+  await page.setViewportSize({width:390,height:844});
+  await page.evaluate(()=>{document.documentElement.style.fontSize='100%';});
+  await go(page,'#/trip/demo-japan/discussions');
+  await expect(page.locator('.conversation-stream')).toBeVisible();
+  const chatMetrics=[];
+  const settle=()=>page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  const geometry=()=>page.evaluate(()=>{const stream=document.querySelector('.conversation-stream').getBoundingClientRect(),composer=document.querySelector('.chat-composer').getBoundingClientRect(),nav=document.querySelector('#nav').getBoundingClientRect();return {width:innerWidth,viewport:innerHeight,font:getComputedStyle(document.body).fontSize,flow:document.body.classList.contains('chat-flow'),streamTop:stream.top,streamBottom:stream.bottom,composerTop:composer.top,composerBottom:composer.bottom,navTop:nav.top};});
+  const reachComposer=async()=>{
+   const input=page.locator('#demo-message');
+   await input.evaluate(el=>el.scrollIntoView({block:'center',inline:'nearest'}));
+   await input.focus();await settle();
+   const hit=await input.evaluate(el=>{const box=el.getBoundingClientRect(),target=document.elementFromPoint(box.x+box.width/2,box.y+box.height/2);return {left:box.left,right:box.right,top:box.top,bottom:box.bottom,viewportWidth:innerWidth,viewportHeight:innerHeight,reachable:target===el||el.contains(target)};});
+   assert.ok(hit.left>=-1&&hit.right<=hit.viewportWidth+1,JSON.stringify(hit));
+   assert.ok(hit.top>=-1&&hit.bottom<=hit.viewportHeight+1,JSON.stringify(hit));
+   assert.equal(hit.reachable,true,JSON.stringify(hit));
+   return hit;
+  };
+  for(const height of [844,480]){
+   await page.setViewportSize({width:390,height});
+   await settle();
+   const bounds=await geometry();
+   assert.ok(bounds.streamBottom<=bounds.composerTop+1,JSON.stringify(bounds));
+   assert.ok(bounds.composerBottom<=bounds.navTop+1,JSON.stringify(bounds));
+   assert.ok(bounds.streamBottom>bounds.streamTop,JSON.stringify(bounds));
+   chatMetrics.push(bounds);
+  }
+  const draft='Несохранённый черновик должен пережить перезагрузку и голосование';
+  await reachComposer();
+  await page.locator('#demo-message').fill(draft);
+  await page.reload();await ready(page);
+  await expect(page.locator('#demo-message')).toHaveValue(draft);
+  const before=(await state(page,true)).trips.find(t=>t.id==='demo-japan');
+  assert.ok(!before.messages.some(message=>message.text===draft));
+  const alternative=before.poll.options.find(option=>option.id==='other');
+  const vote=page.locator('[data-action=demo-vote][data-id=other]');
+  await vote.scrollIntoViewIfNeeded();
+  await vote.click();
+  await expect(page.locator('[data-action=demo-vote][data-id=other]')).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('#demo-message')).toHaveValue(draft);
+  const voted=(await state(page,true)).trips.find(t=>t.id==='demo-japan');
+  assert.equal(voted.poll.myVote,'other');
+  assert.equal(voted.poll.options.find(option=>option.id==='other').votes,alternative.votes+1);
+  await reachComposer();
+  await page.evaluate(()=>{window.__acceptanceChatPut=IDBObjectStore.prototype.put;IDBObjectStore.prototype.put=function(...args){if(this.name==='state')throw new DOMException('Synthetic chat quota test','QuotaExceededError');return window.__acceptanceChatPut.apply(this,args);};});
+  await page.locator('.chat-composer [type=submit]').click();
+  await expect(page.locator('#toast')).toContainText(/места|хранилищ/);
+  await expect(page.locator('#demo-message')).toHaveValue(draft);
+  assert.ok(!(await state(page,true)).trips.find(t=>t.id==='demo-japan').messages.some(message=>message.text===draft));
+  await page.evaluate(()=>{IDBObjectStore.prototype.put=window.__acceptanceChatPut;delete window.__acceptanceChatPut;});
+  await page.locator('.chat-composer [type=submit]').click();
+  await expect(page.locator('.conversation-stream')).toContainText(draft);
+  assert.ok((await state(page,true)).trips.find(t=>t.id==='demo-japan').messages.find(message=>message.text===draft)?.id);
+  await expect(page.locator('#demo-message')).toHaveValue('');
+  await page.reload();await ready(page);
+  await expect(page.locator('#demo-message')).toHaveValue('');
+  const shortLargeText=[];
+  for(const width of [390,320]){
+   await page.setViewportSize({width,height:480});
+   await page.evaluate(()=>{document.documentElement.style.fontSize='200%';});
+   await settle();
+   const beforeInput=await geometry();
+   assert.ok(beforeInput.streamBottom<=beforeInput.composerTop+1,JSON.stringify(beforeInput));
+   if(!beforeInput.flow)assert.ok(beforeInput.composerBottom<=beforeInput.navTop+1,JSON.stringify(beforeInput));
+   const inputHit=await reachComposer();
+   const text=`Синтетическое сообщение: ${width} px, крупный текст 200%`;
+   await page.locator('#demo-message').fill(text);
+   await page.locator('.chat-composer [type=submit]').click();
+   await expect(page.locator('.conversation-stream')).toContainText(text);
+   await expect(page.locator('#demo-message')).toHaveValue('');
+   assert.ok((await state(page,true)).trips.find(t=>t.id==='demo-japan').messages.find(message=>message.text===text)?.id);
+   await reachComposer();
+   shortLargeText.push({width,height:480,font:200,flow:beforeInput.flow,inputHit,sentAndPersisted:true});
+  }
+  await photo(page,'reference-chat-short-viewport-vote-and-send');
+  report.referenceUsability={documents,chat:chatMetrics,shortLargeText,votePersisted:true,draftSurvivedReloadAndVote:true,failedSendRetainedDraft:true,successfulSendClearedDraftAfterCommit:true,messagePersisted:true,resizeSimulationOnly:true,realOSKeyboardTested:false};
+ }finally{await ctx.close();}
+});
 
 async function workerStatus(page){return page.evaluate(async()=>{const registration=await navigator.serviceWorker.ready;const worker=registration.active;return new Promise((resolve,reject)=>{const channel=new MessageChannel();const timer=setTimeout(()=>reject(new Error('Worker status timeout')),10000);channel.port1.onmessage=e=>{clearTimeout(timer);resolve(e.data);};worker.postMessage({type:'GET_STATUS'},[channel.port2]);});});}
 async function waitWorker(page){await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated';},{},{timeout:25000});const s=await workerStatus(page);assert.equal(s.offlineReady,true);return s;}
